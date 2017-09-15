@@ -1,0 +1,2 @@
+﻿DBCC CHECKIDENT ('[BTC]', RESEED, 0);
+GO
