@@ -12,14 +12,9 @@ namespace Webshop.Controllers
 {
     public class ProductController : Controller
     {
-        private ICategoryRepository _categoryRepository;
-        private IProductRepository _productRepository;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IProductRepository _productRepository;
 
-        // GET: /<controller>/
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         public ProductController(IProductRepository productRepository, ICategoryRepository categoryRepository)
 
@@ -30,10 +25,13 @@ namespace Webshop.Controllers
 
         public ViewResult List()
         {
-           ProductsListViewModel productsListViewModel = new ProductsListViewModel();
-            productsListViewModel.Products = _productRepository.Products;
+            ProductsListViewModel productsListViewModel =
+                new ProductsListViewModel
+                {
+                    Products = _productRepository.Products,
+                    CurrentCategory = "CAKELOL"
+                };
 
-            productsListViewModel.CurrentCategory = "cheese cake";
             return View(productsListViewModel);
         }
     }

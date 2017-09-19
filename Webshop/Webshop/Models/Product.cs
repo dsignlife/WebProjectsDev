@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Webshop.Models
 {
-    public class Product : IProductRepository
+    public class Product
     {
         public int ProductId { get; set; }
         public string Name { get; set; }
@@ -24,11 +24,5 @@ namespace Webshop.Models
         public virtual Category Category { get; set; }
 
 
-        public IEnumerable<Product> Products { get; }
-        public IEnumerable<Product> ProductsOfTheWeek { get; }
-        public Product GetProducById(int productId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

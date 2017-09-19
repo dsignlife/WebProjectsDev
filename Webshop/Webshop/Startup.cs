@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Webshop.Models;
@@ -13,33 +15,49 @@ namespace Webshop
 {
     public class Startup
     {
+
+        private IConfigurationRoot _configurationRoot;
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        public Startup(IHostingEnvironment hostingEnvironment)
+        {
+            _configurationRoot = new ConfigurationBuilder()
+                                  .SetBasePath(hostingEnvironment.ContentRootPath)
+                                  .AddJsonFile("appsettings.json")
+                                  .Build();
+
+        }
+
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<ICategoryRepository, MockCategoryRepository>();
-            services.AddTransient<IProductRepository, MockProductRepository>();
+        
+
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(_configurationRoot.GetConnectionString("Webshop")));
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
             services.AddMvc();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory logger)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env) //DbInitializer seed
         {
          
-            if (env.IsDevelopment())
-            {
-                logger.AddConsole();
+          
                 app.UseDeveloperExceptionPage();
                 app.UseStatusCodePages();
                 app.UseStaticFiles();
                 app.UseMvcWithDefaultRoute();
-            }
 
-            //app.Run(async (context) =>
-            //{
-            //    await context.Response.WriteAsync("Hello World!");
-            //});
+                //seed.Seed(app);
+                DbInitializer.Seed(app);
+
+                     
+
+
         }
     }
 }

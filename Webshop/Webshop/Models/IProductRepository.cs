@@ -9,6 +9,6 @@ namespace Webshop.Models
         IEnumerable<Product> ProductsOfTheWeek { get; }
 
 
-        Product GetProducById(int productId);
+        Product GetProductById(int productId);
     }
 }

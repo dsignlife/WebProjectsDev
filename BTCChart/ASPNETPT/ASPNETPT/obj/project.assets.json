@@ -12543,11 +12543,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\TomzPC\\Source\\Repos\\dotnetTraining\\BTCChart\\ASPNETPT\\ASPNETPT\\ASPNETPT.csproj",
+      "projectUniqueName": "C:\\Users\\TomzPC\\Source\\Repos\\WebProjectsDev\\BTCChart\\ASPNETPT\\ASPNETPT\\ASPNETPT.csproj",
       "projectName": "ASPNETPT",
-      "projectPath": "C:\\Users\\TomzPC\\Source\\Repos\\dotnetTraining\\BTCChart\\ASPNETPT\\ASPNETPT\\ASPNETPT.csproj",
+      "projectPath": "C:\\Users\\TomzPC\\Source\\Repos\\WebProjectsDev\\BTCChart\\ASPNETPT\\ASPNETPT\\ASPNETPT.csproj",
       "packagesPath": "C:\\Users\\TomzPC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\TomzPC\\Source\\Repos\\dotnetTraining\\BTCChart\\ASPNETPT\\ASPNETPT\\obj\\",
+      "outputPath": "C:\\Users\\TomzPC\\Source\\Repos\\WebProjectsDev\\BTCChart\\ASPNETPT\\ASPNETPT\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

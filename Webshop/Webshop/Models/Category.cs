@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Webshop.Models
 {
-    public class Category : ICategoryRepository
+    public class Category 
     {
         public int CategoryId { get; set; }
         public string CategoryName  { get; set; }
         public string Description { get; set; }
         public List<Product> Products{ get; set; }
 
-        public IEnumerable<Category> Categories { get; }
+      
     }
 }
