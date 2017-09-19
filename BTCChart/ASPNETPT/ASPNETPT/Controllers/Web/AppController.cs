@@ -30,10 +30,12 @@ namespace ASPNETPT.Controllers.Web
        }
         public IActionResult Index()
         {
+           
+
             try
             {
-                var data = _repo.GetBtCprops().ToList();
-
+                var data = _repo.GetBtCprops().OrderByDescending(x => x.Id).Take(10).ToList(); //show 10 result by id
+                
                 return View(data);
             }
             catch (Exception e)
