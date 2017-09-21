@@ -1,4 +1,7 @@
-﻿@model IEnumerable<ASPNETPT.Models.BtCprop>
+﻿@using ASPNETPT.Models
+@model IEnumerable<ASPNETPT.Models.BtCprop>
+
+
 @{
 ViewBag.Title = "Home Page";
 }
@@ -27,15 +30,14 @@ ViewBag.Title = "Home Page";
         </form>
         
 
+     
         
-        <div >
-            <p><br />CandleChart</p>
-            <div id="candle" style="width: 600px; height: 100%;" class="center-block">
-                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-                <script src="~/js/candlestick.js"></script>
-            </div>
-        </div>
+     
+       
         
+        
+        
+
         
 
     </div>
@@ -43,17 +45,63 @@ ViewBag.Title = "Home Page";
     <div class="col-md-6">
         <h2>BTC Datas</h2>
         
+       @{ var rateList = new List<BtCprop>();
 
-        <ul>        
+        <ul>       
             
             @foreach (var item in Model)
         {
-            <li>@item.Name : @item.Rate : @item.Date : @item.Time</li>
+            <li>BTC Rate:@item.Rate Ask:@item.Ask Bid:@item.Bid Time: @item.Date @item.Time</li>
+
+            rateList.Add(item);
+            
         }
         </ul>
-
+        }
     </div>
 
 </div>
 
+
+
+            <div class="col-md-6">
+                
+            <div id="columnchart_values" style="width: 1100px; height: 500px;" class="center-block">
+                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                <script type="text/javascript">
+
+  google.charts.load("current", {packages:['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["DateTime", "Rate"],
+        ["@rateList[0].Date @rateList[0].Time", @rateList[0].Rate],
+        ["@rateList[1].Date @rateList[1].Time", @rateList[1].Rate],
+        ["@rateList[2].Date @rateList[2].Time", @rateList[2].Rate],
+        ["@rateList[3].Date @rateList[3].Time", @rateList[3].Rate],
+        ["@rateList[4].Date @rateList[4].Time", @rateList[4].Rate]
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" }
+                       ]);
+
+      var options = {
+        title: "Bitchart",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+
+                </script>
+            </div>
+        </div>
 

@@ -16,6 +16,7 @@ namespace ASPNETPT.Models
         public double Ask { get; set; }
         public double Bid { get; set; }
 
+
         //public ICollection<BtCprop> Btc { get; set; }
 
     }

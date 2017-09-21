@@ -34,7 +34,7 @@ namespace ASPNETPT.Controllers.Web
 
             try
             {
-                var data = _repo.GetBtCprops().OrderByDescending(x => x.Id).Take(10).ToList(); //show 10 result by id
+                var data = _repo.GetBtCprops().OrderByDescending(x => x.Id).Take(5).ToList(); //show 10 result by id
                 
                 return View(data);
             }

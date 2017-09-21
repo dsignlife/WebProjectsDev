@@ -12,6 +12,7 @@ namespace ASPNETPT.Models
         {
         private IConfigurationRoot _config;
 
+
         public BtcContext(IConfigurationRoot config, DbContextOptions options) : base(options)
         {
             _config = config;
