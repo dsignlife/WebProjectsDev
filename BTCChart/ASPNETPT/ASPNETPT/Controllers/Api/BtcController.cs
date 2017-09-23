@@ -19,17 +19,20 @@ namespace ASPNETPT.Controllers.Api
         {
             _context = context;
         }
-        [HttpGet("api/btc")]
+        [HttpGet("")]
         public IActionResult Get()
         {
 
             return Ok(_context.GetBtCprops());
         }
 
-        [HttpPost("api/btc")]
+        [HttpPost("")]
         public IActionResult Post([FromBody]BtCprop data)
         {
-            return Ok(true);
+            if (ModelState.IsValid)
+                return Created($"api/btc/{data.Name}", data);
+
+            return BadRequest("Bad data"); 
         }
     }
 }
