@@ -38,7 +38,13 @@ namespace Webshop
                 options.UseSqlServer(_configurationRoot.GetConnectionString("Webshop")));
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+
             services.AddMvc();
+
+            services.AddMemoryCache();
+            services.AddSession();
 
         }
 
@@ -50,6 +56,7 @@ namespace Webshop
                 app.UseDeveloperExceptionPage();
                 app.UseStatusCodePages();
                 app.UseStaticFiles();
+                app.UseSession();
                 app.UseMvcWithDefaultRoute();
 
                 //seed.Seed(app);
