@@ -13,9 +13,8 @@ namespace Webshop.Controllers
     public class ShoppingCartController : Controller
     {
 
-        private IProductRepository _productRepository;
-
-        private ShoppingCart _shoppingCart;
+        private readonly IProductRepository _productRepository;
+        private readonly ShoppingCart _shoppingCart;
 
 
         public ShoppingCartController(IProductRepository productRepository, ShoppingCart shoppingCart)
@@ -47,6 +46,19 @@ namespace Webshop.Controllers
             if (selectedProduct != null)
                 _shoppingCart.AddToCart(selectedProduct, 1);
             
+            return RedirectToAction("Index");
+        }
+
+
+
+        public RedirectToActionResult RemoveFromShoppingCart(int productId)
+        {
+            var selectedProduct = _productRepository.Products.FirstOrDefault(p => p.ProductId == productId);
+
+            if (selectedProduct != null)
+            {
+                _shoppingCart.RemoveFromCart(selectedProduct);
+            }
             return RedirectToAction("Index");
         }
     }

@@ -12,7 +12,7 @@ namespace Webshop.Components
     public class ShoppingCartSummary : ViewComponent
     {
 
-        private ShoppingCart _shoppingCart;
+        private readonly ShoppingCart _shoppingCart;
 
 
         public ShoppingCartSummary(ShoppingCart shoppingCart)
@@ -25,8 +25,8 @@ namespace Webshop.Components
         public IViewComponentResult Invoke()
         {
             
-            //var items = _shoppingCart.GetShoppingCartItems();
-            var items = new List<ShoppingCartItem>() {new ShoppingCartItem(), new ShoppingCartItem()}; //testdata
+            var items = _shoppingCart.GetShoppingCartItems();
+            
             _shoppingCart.ShoppingCartItems = items;
 
             var shoppingCartViewModel = new ShoppingCartViewModel

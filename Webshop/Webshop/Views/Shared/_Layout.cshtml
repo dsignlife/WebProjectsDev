@@ -25,6 +25,11 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    
+                    
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    @await Component.InvokeAsync("CategoryMenu")
+                    <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
                     @await Component.InvokeAsync("ShoppingCartSummary")
                 </ul>
             </div>
@@ -42,6 +47,14 @@
         </div>
         <div class="col-md-9">
             @RenderBody()
+            
+
+            
+                    <div id="footer" class="container-fluid">
+                        <div class="navbar navbar-inverse navbar-fixed-bottom">
+                            <h4 class="text-center text-white">&copy; 2017 CoolBooks Project</h4>
+                        </div>
+                        </div>
         </div>
     </div>
 </div>
