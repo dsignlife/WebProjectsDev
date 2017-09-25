@@ -18,13 +18,15 @@ namespace Webshop.Components
         public ShoppingCartSummary(ShoppingCart shoppingCart)
         {
             _shoppingCart = shoppingCart;
+
+
         }
 
         public IViewComponentResult Invoke()
         {
             
-            var items = _shoppingCart.GetShoppingCartItems();
-            //var items = new List<ShoppingCartItem>() {new ShoppingCartItem(), new ShoppingCartItem()}; //testdata
+            //var items = _shoppingCart.GetShoppingCartItems();
+            var items = new List<ShoppingCartItem>() {new ShoppingCartItem(), new ShoppingCartItem()}; //testdata
             _shoppingCart.ShoppingCartItems = items;
 
             var shoppingCartViewModel = new ShoppingCartViewModel

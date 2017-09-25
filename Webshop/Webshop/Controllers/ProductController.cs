@@ -23,16 +23,30 @@ namespace Webshop.Controllers
             _categoryRepository = categoryRepository;
         }
 
-        public ViewResult List()
+        public ViewResult List(string category)
         {
-            ProductsListViewModel productsListViewModel =
-                new ProductsListViewModel
-                {
-                    Products = _productRepository.Products,
-                    CurrentCategory = "CAKELOL"
-                };
+            IEnumerable<Product> products;
+            string currentCategory = string.Empty;
 
-            return View(productsListViewModel);
+            if (string.IsNullOrEmpty(category))
+            {
+                products = _productRepository.Products.OrderBy(p => p.ProductId);
+                currentCategory = "All products";
+            }
+            else
+            {
+                products = _productRepository.Products.Where(p => p.Category.CategoryName == category)
+                   .OrderBy(p => p.ProductId);
+                currentCategory = _categoryRepository.Categories.FirstOrDefault(c => c.CategoryName == category).CategoryName;
+            }
+      
+
+            return View(new ProductsListViewModel()
+            {
+                Products = products,
+                CurrentCategory = currentCategory
+                
+            });
         }
     }
 }

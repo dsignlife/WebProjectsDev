@@ -57,7 +57,19 @@ namespace Webshop
                 app.UseStatusCodePages();
                 app.UseStaticFiles();
                 app.UseSession();
-                app.UseMvcWithDefaultRoute();
+                //app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "categoryfilter",
+                    template: "Product/{action}/{category?}",
+                    defaults: new{Controller="Product", action= "List"});
+
+
+                routes.MapRoute(
+                name: "default",
+                template: "{controller=Home}/{action=Index}/{id?}");
+            });
 
                 //seed.Seed(app);
                 DbInitializer.Seed(app);
