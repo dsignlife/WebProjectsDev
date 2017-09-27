@@ -14,9 +14,7 @@ namespace CoolBooksProject.ViewModels
 
         [Required]
         [EmailAddress]
-
         public string Email { get; set; }
-
 
         [Required]
         [StringLength(4096, MinimumLength = 10)]

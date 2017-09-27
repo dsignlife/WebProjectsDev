@@ -7,11 +7,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CoolBooksProject.Models;
+using CoolBooksProject.ViewModels;
 
 namespace CoolBooksProject.Controllers
 {
-    [Authorize]
-    public class BooksController : Controller
+      [Authorize] // Needed for login functionality
+      public class BooksController : Controller
     {
         private CoolBooksDbModel db = new CoolBooksDbModel();
 
@@ -124,7 +125,7 @@ namespace CoolBooksProject.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Books books = db.Books.Find(id);
-            db.Books.Remove(books);
+            books.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -137,5 +138,6 @@ namespace CoolBooksProject.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

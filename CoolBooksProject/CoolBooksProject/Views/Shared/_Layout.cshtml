@@ -4,9 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="~/favicon.ico" />
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <title>@ViewBag.Title - Coolbooks</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+        <link href="~/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/bower_components/bootswatch/cyborg/bootstrap.min.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -25,7 +28,6 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Books", "Index", "Books")</li>
                 </ul>
                 
                 
@@ -50,6 +52,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

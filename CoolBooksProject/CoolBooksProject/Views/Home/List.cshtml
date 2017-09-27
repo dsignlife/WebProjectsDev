@@ -1,0 +1,16 @@
+﻿@model ListViewModel
+
+@using CoolBooksProject.Models;
+@using CoolBooksProject.ViewModels;
+
+    <h1>All Books</h1>
+
+
+    @foreach (var book in Model.Books)
+    {
+
+        @Html.Partial("BookOverviewSummary", book)
+    }
+
+
+
