@@ -31,11 +31,12 @@ namespace Webshop.Controllers
             if (string.IsNullOrEmpty(category))
             {
                 products = _productRepository.Products.OrderBy(p => p.ProductId);
-                currentCategory = "All products";
+                currentCategory = "All Products";
             }
             else
             {
-                products = _productRepository.Products.Where(p => p.Category.CategoryName == category)
+                products = _productRepository.Products
+                    .Where(p => p.Category.CategoryName == category)
                    .OrderBy(p => p.ProductId);
                 currentCategory = _categoryRepository.Categories.FirstOrDefault(c => c.CategoryName == category).CategoryName;
             }

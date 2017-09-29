@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -9,7 +10,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
         <link href="~/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/bower_components/bootswatch/cyborg/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/bower_components/bootswatch/yeti/bootstrap.min.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -26,6 +27,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.Partial("GenreMenu")</li>                    
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>

@@ -4,109 +4,118 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h1>Details</h1>
 
 <div>
-    <h4>Books</h4>
+
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
-        </dt>
+    
+    <div class="container-fluid">
+        <div class="pull-right" >
+        <img alt="@Model.Title" class="img-thumbnail" src="@Model.ImagePath" width="150" height="200">
+        </div>
+        <dl class="dl-horizontal">
 
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUsers.Email)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Authors.FirstName)
-        </dt>
+                       <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Authors.FirstName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Genres.Name)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Genres.Name)
-        </dd>
+            <dt>
+                Author
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Authors.FirstName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+            <dt>
+                Genres
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AlternativeTitle)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Genres.Name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.AlternativeTitle)
-        </dd>
+ 
+                        <dt>
+               Added by
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Part)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.AspNetUsers.Email)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Part)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.AlternativeTitle)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ISBN)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.AlternativeTitle)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ISBN)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Part)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PublishDate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Part)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.PublishDate)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ImagePath)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Created)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ISBN)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Created)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PublishDate)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PublishDate)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </dt>
 
-    </dl>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Created)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Created)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsDeleted)
+            </dd>
+
+        </dl>
+    </div>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

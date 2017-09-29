@@ -10,6 +10,7 @@ using CoolBooksProject.Models;
 
 namespace CoolBooksProject.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class GenresController : Controller
     {
         private CoolBooksDbModel db = new CoolBooksDbModel();
@@ -110,7 +111,7 @@ namespace CoolBooksProject.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Genres genres = db.Genres.Find(id);
-            db.Genres.Remove(genres);
+            genres.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -119,7 +119,7 @@ namespace CoolBooksProject.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Reviews reviews = db.Reviews.Find(id);
-            db.Reviews.Remove(reviews);
+            reviews.IsDeleted = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

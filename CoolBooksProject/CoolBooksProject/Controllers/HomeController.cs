@@ -16,7 +16,6 @@ namespace CoolBooksProject.Controllers
         //    return View();
         //}
 
-
         private CoolBooksDbModel db = new CoolBooksDbModel();
 
         public ActionResult Index()
@@ -25,31 +24,46 @@ namespace CoolBooksProject.Controllers
 
             books = db.Books.Include(b => b.Authors).Include(b => b.Genres).OrderByDescending(i => i.Id).Take(3); // take 3 
 
-
             return View(new ListViewModel
             {
-
                 Books = books
             });
         }
 
-
-
-        public ActionResult List()
+        public ActionResult List(string genre)
         {
             IEnumerable<Books> books;
+            string currentGenre = string.Empty;
 
-            books = db.Books.Include(b => b.Authors).Include(b => b.Genres);
+            if (string.IsNullOrEmpty(genre))
+            {
+                books = db.Books
+                    .Include(b => b.Authors)
+                    .Include(b => b.Genres)
+                    .OrderBy(b => b.Id);
+                currentGenre = "All Books";
+            }
+            else
+            {
+                books = db.Books
+                    .Where(g => g.Genres.Name == genre)
+                    .OrderBy(i => i.Id);
+
+                currentGenre = db.Genres.FirstOrDefault(d => d.Name == genre).Name;
+            }
+
+
+
+            //books = db.Books.Include(b => b.Authors).Include(b => b.Genres);
 
 
             return View(new ListViewModel
             {
 
-                Books = books
+                Books = books,
+                CurrentGenre = currentGenre
             });
         }
-
-
 
         public ActionResult Details(int id)
         {
@@ -62,18 +76,14 @@ namespace CoolBooksProject.Controllers
                 return View("ERROR 404");
             }
 
-             
-
             return View(test);
         }
 
-
-
-
-
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            string aboutText = "This appliction serves as a CoolBookReviewer";
+
+            ViewBag.Message = aboutText;
 
             return View();
         }
