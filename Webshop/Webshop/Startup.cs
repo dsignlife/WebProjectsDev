@@ -40,6 +40,7 @@ namespace Webshop
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(ShoppingCart.GetCart);
+            services.AddTransient<IOrderRepository, OrderRepository>();
 
             services.AddMvc();
 
