@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using ASPNETPT.Controllers.Web.Services;
 using ASPNETPT.Models;
 using ASPNETPT.ViewModels;
@@ -19,6 +21,7 @@ namespace ASPNETPT.Controllers.Web
         private IConfigurationRoot _config;
         private IBtcRepo _repo;
         private ILogger<AppController> _logger;
+       
 
 
         public AppController(IMailService mailService, IConfigurationRoot config, IBtcRepo repo, ILogger<AppController> logger)
@@ -30,8 +33,9 @@ namespace ASPNETPT.Controllers.Web
        }
         public IActionResult Index()
         {
-           
 
+
+            
             try
             {
                 var data = _repo.GetBtCprops().OrderByDescending(x => x.Id).Take(5).ToList(); //show 10 result by id
@@ -44,7 +48,11 @@ namespace ASPNETPT.Controllers.Web
                 return Redirect("/error");
 
             }
-          
+
+
+            
+
+
 
         }
 
@@ -73,5 +81,13 @@ namespace ASPNETPT.Controllers.Web
             return View();
         }
 
+
+        public IActionResult Fetch()
+        {
+
+            _repo.GetBtCdata();
+
+            return Content("Fetched Data");
+        }
     }
 }
