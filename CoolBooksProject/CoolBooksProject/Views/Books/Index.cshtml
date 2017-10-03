@@ -12,7 +12,7 @@
 <form method="get" action="@Url.Action("Index")" data-otf-ajax="true">
 
     <div style="display: inline-block">
-        <input type="search" placeholder="Seach" name="searchTerm" id="SearchBar"class="form-control"/>
+        <input type="search" placeholder="Search" name="searchTerm" id="SearchBar"class="form-control"/>
     </div>
 
     <div style="display: inline-block;">
@@ -74,6 +74,7 @@
                   </td>
                   <td>
                         @Html.DisplayFor(modelItem => item.Authors.FirstName)
+                        @Html.DisplayFor(modelItem => item.Authors.LastName)
                   </td>
                   <td>
                         @Html.DisplayFor(modelItem => item.Genres.Name)

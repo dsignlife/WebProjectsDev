@@ -29,10 +29,14 @@ namespace CoolBooksProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Authors authors = db.Authors.Find(id);
+            
+
             if (authors == null)
             {
                 return HttpNotFound();
             }
+
+          
             return View(authors);
         }
 

@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CoolBooksProject.Models;
+using Microsoft.AspNet.Identity;
 
 namespace CoolBooksProject.Controllers
 {
+    [Authorize]
     public class ReviewsController : Controller
     {
         private CoolBooksDbModel db = new CoolBooksDbModel();
@@ -17,6 +19,7 @@ namespace CoolBooksProject.Controllers
         // GET: Reviews
         public ActionResult Index()
         {
+            ViewBag.CurrentUser = User.Identity.GetUserId();
             var reviews = db.Reviews.Include(r => r.AspNetUsers).Include(r => r.Books);
             return View(reviews.ToList());
         }
@@ -36,12 +39,20 @@ namespace CoolBooksProject.Controllers
             return View(reviews);
         }
 
-        // GET: Reviews/Create
-        public ActionResult Create()
+        //// GET: Reviews/Create
+        public ActionResult Create(int bookId)
         {
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email");
-            ViewBag.BookId = new SelectList(db.Books, "Id", "UserId");
-            return View();
+            Books book = db.Books.SingleOrDefault(b => b.Id == bookId);
+
+            Reviews review = new Reviews
+            {
+                BookId = bookId,
+                Title = book.Title,
+                Created = DateTime.Now.Date,
+                UserId = User.Identity.GetUserId(),
+                IsDeleted = false
+            };
+            return View(review);
         }
 
         // POST: Reviews/Create
@@ -51,16 +62,17 @@ namespace CoolBooksProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,BookId,UserId,Title,Text,Rating,Created,IsDeleted")] Reviews reviews)
         {
+
             if (ModelState.IsValid)
             {
-                db.Reviews.Add(reviews);
+                Books book = db.Books.SingleOrDefault(b => b.Id == reviews.BookId);
+                book.Reviews.Add(reviews);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Home", new { id = book.Id });
             }
 
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", reviews.UserId);
-            ViewBag.BookId = new SelectList(db.Books, "Id", "UserId", reviews.BookId);
-            return View(reviews);
+            return View();
+                     
         }
 
         // GET: Reviews/Edit/5
@@ -71,12 +83,18 @@ namespace CoolBooksProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Reviews reviews = db.Reviews.Find(id);
+
             if (reviews == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", reviews.UserId);
-            ViewBag.BookId = new SelectList(db.Books, "Id", "UserId", reviews.BookId);
+
+            // A user can only edit his/her own reviews
+            if (reviews.UserId != User.Identity.GetUserId())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View(reviews);
         }
 
@@ -91,11 +109,9 @@ namespace CoolBooksProject.Controllers
             {
                 db.Entry(reviews).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Home", new { id = reviews.BookId });
             }
-            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", reviews.UserId);
-            ViewBag.BookId = new SelectList(db.Books, "Id", "UserId", reviews.BookId);
-            return View(reviews);
+            return View("Error");
         }
 
         // GET: Reviews/Delete/5
@@ -105,11 +121,19 @@ namespace CoolBooksProject.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Reviews reviews = db.Reviews.Find(id);
             if (reviews == null)
             {
                 return HttpNotFound();
             }
+
+            // A user can ONLY delete his/her own reviews
+            if (reviews.UserId != User.Identity.GetUserId())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View(reviews);
         }
 

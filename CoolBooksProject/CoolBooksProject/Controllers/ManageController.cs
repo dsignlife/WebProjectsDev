@@ -62,15 +62,18 @@ namespace CoolBooksProject.Controllers
             var userId = User.Identity.GetUserId();
             Users user = db.Users.Find(userId);
 
-            byte[] imageByteData = user.Picture;
 
-            if (imageByteData != null)
+            if (user != null)
             {
-                string imageBase64Data = Convert.ToBase64String(imageByteData);
-                string imageDataURL = string.Format($"data:image/png;base64,{imageBase64Data}");
-                ViewBag.ImageData = imageDataURL;
+                byte[] imageByteData = user.Picture;
+                if (imageByteData != null)
+                {
+                    string imageBase64Data = Convert.ToBase64String(imageByteData);
+                    string imageDataURL = string.Format($"data:image/png;base64,{imageBase64Data}");
+                    ViewBag.ImageData = imageDataURL;
+                }
             }
-
+            
 
             return View(user);
         }

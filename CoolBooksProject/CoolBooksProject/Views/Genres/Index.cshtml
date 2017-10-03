@@ -1,10 +1,11 @@
-﻿@model IEnumerable<CoolBooksProject.Models.Genres>
+﻿@using CoolBooksProject.Controllers
+@model IEnumerable<CoolBooksProject.Models.Genres>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h1>Genres</h1>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -29,7 +30,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+           @Html.ActionLink(item.Name, "List", "Home", new { genre = item.Name } , null)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)

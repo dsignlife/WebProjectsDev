@@ -221,6 +221,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ContactViewModel.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
+    <Compile Include="ViewModels\ReviewsBoxViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bower_components\bootstrap\dist\css\bootstrap-theme.css" />
@@ -421,6 +422,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\noimage.png" />
     <Content Include="Scripts\AjaxSeach.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -687,6 +689,11 @@
     <Content Include="Views\Manage\Details.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
     <Content Include="Views\Shared\GenreMenu.cshtml" />
+    <Content Include="Views\Shared\CarouselSlide.cshtml" />
+    <Content Include="Views\Shared\Reviews.cshtml" />
+    <Content Include="Views\Books\UserIndex.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Shared\AuthorBooks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
