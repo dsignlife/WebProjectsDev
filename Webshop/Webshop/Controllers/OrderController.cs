@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Webshop.Models;
 
@@ -21,12 +22,16 @@ namespace Webshop.Controllers
             _shoppingCart = shoppingCart;
         }
         // GET: /<controller>/
+
+     [Authorize]
         public IActionResult Checkout()
         {
             return View();
         }
 
+
         [HttpPost]
+        [Authorize]
         public IActionResult Checkout(Order order)
         {
             var items = _shoppingCart.GetShoppingCartItems();

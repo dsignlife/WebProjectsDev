@@ -33,6 +33,7 @@
                     <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
                     @await Component.InvokeAsync("ShoppingCartSummary")
                 </ul>
+                @await Html.PartialAsync("LoginPartial")
             </div>
         </div>
     </nav>
@@ -51,13 +52,15 @@
             
 
             
-                    <div id="footer" class="container-fluid">
-                        <div class="navbar navbar-inverse navbar-fixed-bottom">
-                            <h4 class="text-center text-white">&copy; 2017 CoolBooks Project</h4>
-                        </div>
-                        </div>
+            <br /><br />
+            <div id="footer" class="container-fluid">
+                <div class="navbar navbar-inverse navbar-fixed-bottom">
+                    <h4 class="text-center text-white">&copy; 2017 CoolBooks Project</h4>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+    @RenderSection("scripts", required: false)
 </body>
 </html>

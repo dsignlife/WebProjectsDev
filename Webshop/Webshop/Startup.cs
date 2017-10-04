@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,6 +37,9 @@ namespace Webshop
 
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(_configurationRoot.GetConnectionString("Webshop")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -58,6 +62,7 @@ namespace Webshop
                 app.UseStatusCodePages();
                 app.UseStaticFiles();
                 app.UseSession();
+                app.UseAuthentication();
                 //app.UseMvcWithDefaultRoute();
             app.UseMvc(routes =>
             {
