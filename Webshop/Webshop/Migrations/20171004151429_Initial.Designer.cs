@@ -11,8 +11,8 @@ using Webshop.Models;
 namespace Webshop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20171004090454_Identity")]
-    partial class Identity
+    [Migration("20171004151429_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -25,6 +25,7 @@ namespace Webshop.Controllers
 
         public ViewResult List(string category)
         {
+            
             IEnumerable<Product> products;
             string currentCategory = string.Empty;
 
