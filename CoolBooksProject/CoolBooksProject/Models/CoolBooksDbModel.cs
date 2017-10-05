@@ -7,9 +7,10 @@ namespace CoolBooksProject.Models
 
     public partial class CoolBooksDbModel : DbContext
     {
-        public CoolBooksDbModel()
-            : base("name=CoolBooksDbModel")
+        public CoolBooksDbModel(): base("CoolBooksDbModel")
+            
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<CoolBooksDbModel, CoolBooksProject.Migrations.Configuration>("CoolBooksDbModel"));
         }
 
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }

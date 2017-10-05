@@ -90,9 +90,9 @@ namespace CoolBooksProject.Controllers
             }
 
             // A user can only edit his/her own reviews
-            if (reviews.UserId != User.Identity.GetUserId() && User.IsInRole("Admin") == false)
+            if (reviews.UserId != User.Identity.GetUserId() && !User.IsInRole("Admin"))
             {
-                return RedirectToAction("Index", "Home");
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
             return View(reviews);
@@ -129,9 +129,9 @@ namespace CoolBooksProject.Controllers
             }
 
             // A user can ONLY delete his/her own reviews
-            if (reviews.UserId != User.Identity.GetUserId() && User.IsInRole("Admin") == false)
+            if (reviews.UserId != User.Identity.GetUserId() && !User.IsInRole("Admin"))
             {
-                return RedirectToAction("Index", "Home");
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
             return View(reviews);

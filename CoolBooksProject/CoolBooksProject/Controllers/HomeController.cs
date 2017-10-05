@@ -31,9 +31,9 @@ namespace CoolBooksProject.Controllers
         public Books RandomBook()
         {
             Books randomBook;
-            Random rnd = new Random(DateTime.Now.Second);
-            List<int> bookIds = new List<int>();
+            Random rnd = new Random(DateTime.Now.Millisecond);
 
+            List<int> bookIds = new List<int>();
             foreach (var book in db.Books)
             {
                 if (book.IsDeleted == false)

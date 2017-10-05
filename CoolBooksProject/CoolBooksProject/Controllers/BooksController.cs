@@ -114,7 +114,6 @@ namespace CoolBooksProject.Controllers
                                                }), "Id", "FullName");
 
             ViewBag.GenreId = new SelectList(db.Genres, "Id", "Name");
-
             return View(book);
         }
 
@@ -133,9 +132,9 @@ namespace CoolBooksProject.Controllers
                 return HttpNotFound();
             }
 
-            if (books.UserId != User.Identity.GetUserId() && User.IsInRole("Admin") == false)
+            if (books.UserId != User.Identity.GetUserId() && !User.IsInRole("Admin"))
             {
-                RedirectToAction("Index", "Home");
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
             ViewBag.AuthorId = new SelectList((from a in db.Authors
@@ -189,11 +188,13 @@ namespace CoolBooksProject.Controllers
                 return HttpNotFound();
             }
 
-            if (books.UserId != User.Identity.GetUserId() && User.IsInRole("Admin") == false)
+            if (books.UserId != User.Identity.GetUserId() && !User.IsInRole("Admin"))
             {
-                RedirectToAction("Index", "Home");
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
+
             return View(books);
+ 
         }
 
         // POST: Books/Delete/5
