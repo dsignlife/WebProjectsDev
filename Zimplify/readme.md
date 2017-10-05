@@ -1,1 +1,1 @@
-[Zimplify Azure hosted](http://zimplify.azurewebsites.net/) highschool project in 2010
+[Zimplify Azure hosted](http://zimplify.azurewebsites.net/) highschool project made in 2010 ish
