@@ -261,3 +261,7 @@ __pycache__/
 *.pyc
 /Webshop/Webshop/appsettings.production.json
 /Webshop/Webshop/Properties/PublishProfiles
+/CoolBooksProject/CoolBooksProject/Properties/PublishProfiles
+/CoolBooksProject/CoolBooksProject/Web.Release.config
+/CoolBooksProject/CoolBooksProject/Web.Debug.config
+/CoolBooksProject/CoolBooksProject/Web.config
