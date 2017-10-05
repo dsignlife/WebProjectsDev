@@ -7,194 +7,135 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CoolBooksProject.Models;
-using CoolBooksProject.ViewModels;
-using Microsoft.AspNet.Identity;
 
 namespace CoolBooksProject.Controllers
 {
-      // I think this breaks the Users ability to see/use this page 
-      // Which is part of the requirements 
-      // But users should only be eligable to See the results and press "View" aka "Details"
-      [Authorize] 
+      [Authorize] // Needed for login functionality
       public class BooksController : Controller
-      {
-            private CoolBooksDbModel db = new CoolBooksDbModel();
+    {
+        private CoolBooksDbModel db = new CoolBooksDbModel();
 
-            // GET: Books
-            [Authorize(Roles = "Admin")]
-            public ActionResult Index(string searchTerm)
+        // GET: Books
+        public ActionResult Index()
+        {
+            var books = db.Books.Include(b => b.AspNetUsers).Include(b => b.Authors).Include(b => b.Genres);
+            return View(books.ToList());
+        }
+
+        // GET: Books/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
             {
-                  if (searchTerm != null)
-                  {
-                       
-                        return View(db.Books
-                            .Include(b => b.AspNetUsers)
-                            .Include(b => b.Authors)
-                            .Include(b => b.Genres)
-                            .Where(x => ( x.Title.Contains(searchTerm) ||
-                                          x.ISBN.Equals(searchTerm) ||
-                                          x.Genres.Name.Contains(searchTerm) ||
-                                          x.Authors.FirstName.Contains(searchTerm) ||
-                                          x.Authors.LastName.Contains(searchTerm) ||
-                                          x.AspNetUsers.Email.Contains(searchTerm)))
-                                          .ToList());
-                  }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Books books = db.Books.Find(id);
+            if (books == null)
+            {
+                return HttpNotFound();
+            }
+            return View(books);
+        }
 
-                  var books = db.Books.Include(b => b.AspNetUsers).Include(b => b.Authors).Include(b => b.Genres);
-                  return View(books.ToList());
+        // GET: Books/Create
+        public ActionResult Create()
+        {
+            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.AuthorId = new SelectList(db.Authors, "Id", "FirstName");
+            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Name");
+            return View();
+        }
+
+        // POST: Books/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,UserId,AuthorId,GenreId,Title,AlternativeTitle,Part,Description,ISBN,PublishDate,ImagePath,Created,IsDeleted")] Books books)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Books.Add(books);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            // GET: Books
-            // For Users and renders a slightly different view than for Admins
-            [Authorize(Roles = "User")]
-            public ActionResult UserIndex(string searchTerm)
+            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", books.UserId);
+            ViewBag.AuthorId = new SelectList(db.Authors, "Id", "FirstName", books.AuthorId);
+            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Name", books.GenreId);
+            return View(books);
+        }
+
+        // GET: Books/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
             {
-                  if (searchTerm != null)
-                  {
-
-                        return View(db.Books
-                            .Include(b => b.AspNetUsers)
-                            .Include(b => b.Authors)
-                            .Include(b => b.Genres)
-                            .Where(x => (x.Title.Contains(searchTerm) ||
-                                          x.ISBN.Equals(searchTerm) ||
-                                          x.Genres.Name.Contains(searchTerm) ||
-                                          x.Authors.FirstName.Contains(searchTerm) ||
-                                          x.Authors.LastName.Contains(searchTerm) ||
-                                          x.AspNetUsers.Email.Contains(searchTerm)))
-                                          .ToList());
-                  }
-
-                  var books = db.Books.Include(b => b.AspNetUsers).Include(b => b.Authors).Include(b => b.Genres);
-                  return View("UserIndex", books.ToList());
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            // GET: Books/Details/5
-            public ActionResult Details(int? id)
+            Books books = db.Books.Find(id);
+            if (books == null)
             {
-                  if (id == null)
-                  {
-                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                  }
-                  Books books = db.Books.Find(id);
-                  if (books == null)
-                  {
-                        return HttpNotFound();
-                  }
-                  return View(books);
+                return HttpNotFound();
             }
-
-            // GET: Books/Create
-            [Authorize(Roles = "Admin")]
-            public ActionResult Create()
-            {
-                  ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email");
-                  ViewBag.AuthorId = new SelectList(db.Authors, "Id", "FirstName");
-                  ViewBag.GenreId = new SelectList(db.Genres, "Id", "Name");
-                  return View();
-            }
-
-            // POST: Books/Create
-            // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-            // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            [Authorize]
-            public ActionResult Create([Bind(Include = "Id,UserId,AuthorId,GenreId,Title,AlternativeTitle,Part,Description,ISBN,PublishDate,ImagePath,Created,IsDeleted")] Books books)
-            {
-                  if (ModelState.IsValid)
-                  {
-                        // Vice - This is Work In Progress
-                        // Same goes for the Create View.
-
-                        //books.Id = //Auto Increment in db?
-                        books.UserId = User.Identity.GetUserId();
-                        books.Created = DateTime.Now.Date; // Created
-                        books.IsDeleted = false;
-
-                        db.Books.Add(books);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                  }
-
-                  return View(books);
-            }
-
-            // GET: Books/Edit/5
-            [Authorize(Roles = "Admin")]
-            public ActionResult Edit(int? id)
-            {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                Books books = db.Books.Find(id);
-                if (books == null)
-                {
-                    return HttpNotFound();
-                }
-                ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", books.UserId);
-                ViewBag.AuthorId = new SelectList(db.Authors, "Id", "FirstName", books.AuthorId);
-                ViewBag.GenreId = new SelectList(db.Genres, "Id", "Name", books.GenreId);
-                return View(books);
-            }
+            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", books.UserId);
+            ViewBag.AuthorId = new SelectList(db.Authors, "Id", "FirstName", books.AuthorId);
+            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Name", books.GenreId);
+            return View(books);
+        }
 
         // POST: Books/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-            [HttpPost]
-            [ValidateAntiForgeryToken]
-            [Authorize(Roles = "Admin")]
-            public ActionResult Edit([Bind(Include = "Id,UserId,AuthorId,GenreId,Title,AlternativeTitle,Part,Description,ISBN,PublishDate,ImagePath,Created,IsDeleted")] Books books)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,UserId,AuthorId,GenreId,Title,AlternativeTitle,Part,Description,ISBN,PublishDate,ImagePath,Created,IsDeleted")] Books books)
+        {
+            if (ModelState.IsValid)
             {
-                  if (ModelState.IsValid)
-                  {
-                        db.Entry(books).State = EntityState.Modified;
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                  }
-                  ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", books.UserId);
-                  ViewBag.AuthorId = new SelectList(db.Authors, "Id", "FirstName", books.AuthorId);
-                  ViewBag.GenreId = new SelectList(db.Genres, "Id", "Name", books.GenreId);
-                  return View(books);
+                db.Entry(books).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
+            ViewBag.UserId = new SelectList(db.AspNetUsers, "Id", "Email", books.UserId);
+            ViewBag.AuthorId = new SelectList(db.Authors, "Id", "FirstName", books.AuthorId);
+            ViewBag.GenreId = new SelectList(db.Genres, "Id", "Name", books.GenreId);
+            return View(books);
+        }
 
-            // GET: Books/Delete/5
-            [Authorize(Roles = "Admin")]
-            public ActionResult Delete(int? id)
+        // GET: Books/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
             {
-                  if (id == null)
-                  {
-                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                  }
-                  Books books = db.Books.Find(id);
-                  if (books == null)
-                  {
-                        return HttpNotFound();
-                  }
-                  return View(books);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            // POST: Books/Delete/5
-            [HttpPost, ActionName("Delete")]
-            [ValidateAntiForgeryToken]
-            [Authorize(Roles = "Admin")]
-            public ActionResult DeleteConfirmed(int id)
+            Books books = db.Books.Find(id);
+            if (books == null)
             {
-                  Books books = db.Books.Find(id);
-                  books.IsDeleted = true;
-                  db.SaveChanges();
-                  return RedirectToAction("Index");
+                return HttpNotFound();
             }
+            return View(books);
+        }
 
-            protected override void Dispose(bool disposing)
+        // POST: Books/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Books books = db.Books.Find(id);
+            books.IsDeleted = true;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                  if (disposing)
-                  {
-                        db.Dispose();
-                  }
-                  base.Dispose(disposing);
+                db.Dispose();
             }
-
-      }
+            base.Dispose(disposing);
+        }
+    }
 }

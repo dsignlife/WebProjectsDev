@@ -7,11 +7,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CoolBooksProject.Models;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Net;
-using static System.Net.Mime.MediaTypeNames;
-using System.IO;
 
 namespace CoolBooksProject.Controllers
 {
@@ -20,7 +15,6 @@ namespace CoolBooksProject.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private CoolBooksDbModel db = new CoolBooksDbModel();
 
         public ManageController()
         {
@@ -38,9 +32,9 @@ namespace CoolBooksProject.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set
-            {
-                _signInManager = value;
+            private set 
+            { 
+                _signInManager = value; 
             }
         }
 
@@ -54,63 +48,6 @@ namespace CoolBooksProject.Controllers
             {
                 _userManager = value;
             }
-        }
-
-        // GET: /Manage/Details
-        public ActionResult Details()
-        {
-            var userId = User.Identity.GetUserId();
-            Users user = db.Users.Find(userId);
-
-
-            if (user != null)
-            {
-                byte[] imageByteData = user.Picture;
-                if (imageByteData != null)
-                {
-                    string imageBase64Data = Convert.ToBase64String(imageByteData);
-                    string imageDataURL = string.Format($"data:image/png;base64,{imageBase64Data}");
-                    ViewBag.ImageData = imageDataURL;
-                }
-            }
-            
-
-            return View(user);
-        }
-
-        // GET: /Manage/Edit
-        public ActionResult Edit()
-        {
-            var userId = User.Identity.GetUserId();
-            Users user = db.Users.Find(userId);
-            return View(user);
-        }
-
-        // POST: /Manage/Edit
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserId,FirstName,LastName,Gender,Birthdate,Phone,Address,Zipcode,City,Country,Email,Info,Created", Exclude = "Picture")] Users user)
-        {
-           if (ModelState.IsValid)
-           {
-
-                byte[] imageData = null;
-                if (Request.Files.Count > 0)
-                {
-                    HttpPostedFileBase imgFiles = Request.Files["Picture"];
-
-                    using (var binaryReader = new BinaryReader(imgFiles.InputStream))
-                    {
-                        imageData = binaryReader.ReadBytes(imgFiles.ContentLength);
-                    }
-                }
-
-                user.Picture = imageData;
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Details", "Manage");
-           }
-           return View(user);
         }
 
         //
@@ -133,7 +70,7 @@ namespace CoolBooksProject.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
         }
@@ -396,7 +333,7 @@ namespace CoolBooksProject.Controllers
             base.Dispose(disposing);
         }
 
-        #region Helpers
+#region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -447,6 +384,6 @@ namespace CoolBooksProject.Controllers
             Error
         }
 
-        #endregion
+#endregion
     }
 }

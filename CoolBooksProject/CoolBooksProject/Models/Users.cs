@@ -22,7 +22,6 @@ namespace CoolBooksProject.Models
         [StringLength(1)]
         public string Gender { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? Birthdate { get; set; }
 
         [Column(TypeName = "image")]
@@ -50,7 +49,6 @@ namespace CoolBooksProject.Models
         [StringLength(50)]
         public string Info { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Created { get; set; }
 
         public bool IsDeleted { get; set; }

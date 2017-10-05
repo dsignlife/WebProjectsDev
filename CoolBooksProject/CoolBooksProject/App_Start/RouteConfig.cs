@@ -14,13 +14,6 @@ namespace CoolBooksProject
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-            name: "genrefilter",
-            url: "Home/{action}/{genre}",
-            defaults: new { Controller = "Home", action = "List", genre = UrlParameter.Optional }
-            );
-
-
-            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

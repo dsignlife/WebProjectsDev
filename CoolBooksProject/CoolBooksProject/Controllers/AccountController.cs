@@ -17,7 +17,6 @@ namespace CoolBooksProject.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private CoolBooksDbModel db = new CoolBooksDbModel();
 
         public AccountController()
         {
@@ -157,21 +156,13 @@ namespace CoolBooksProject.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
+                    
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    // Add User's details to User table
-                    DateTime createdDateTime = DateTime.Now;
-                    var userDetails = new Users { UserId = user.Id, FirstName = model.FirstName, LastName = model.LastName, Email = model.Email, IsDeleted = false, Created = createdDateTime.Date };
-                    db.Users.Add(userDetails);
-                    db.SaveChanges();
-
-                    // Assign User to Role "User" by default
-                    await this.UserManager.AddToRoleAsync(user.Id, "User");
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

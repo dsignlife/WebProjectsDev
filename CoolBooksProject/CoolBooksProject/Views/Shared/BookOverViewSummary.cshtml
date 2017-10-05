@@ -1,20 +1,20 @@
 ﻿
 @model CoolBooksProject.Models.Books
-
-
-
-<div class="col-sm-4 col-lg-4 col-md-4">
-    <div class="thumbnail">
-        <br />
-        <img src="@Model.ImagePath" alt="" width="150" max-height="200px">
-        <div class="caption" id="@Model.Id">
-            <h3 class="pull-right">@Model.Genres.Name</h3>
-            <div>
-                <h3> @Html.ActionLink(@Model.Title, "Details", new { id = Model.Id })</h3>
+    
+    
+    <div class="col-sm-4 col-lg-4 col-md-4">
+        <div class="thumbnail">
+            <img src="@Model.ImagePath" alt="">
+            <div class="caption">
+                <h3 class="pull-right">@Model.Title</h3>
+                        <h3><a asp-controller="Books"
+                       asp-action="List"
+                       asp-route-id="@Model.Id">@Model.Title</a>
+                </h3>
+    
+                <p>@Model.Description</p>
             </div>
 
-            <div style="overflow: hidden;  max-height: 200px;"><p>@Model.Description</p></div>
         </div>
     </div>
-</div>
 
