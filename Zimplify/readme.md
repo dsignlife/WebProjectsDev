@@ -1,1 +1,1 @@
-[Azure hosted](http://dsignarchives.azurewebsites.net/zimplify) highschool project at 16
+[Zimplify Azure hosted](http://zimplify.azurewebsites.net/) highschool project at 16
