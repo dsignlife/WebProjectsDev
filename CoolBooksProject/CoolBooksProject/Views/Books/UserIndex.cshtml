@@ -1,0 +1,76 @@
+﻿@model IEnumerable<CoolBooksProject.Models.Books>
+
+@{
+      ViewBag.Title = "Book Details";
+}
+
+<h1>Book Details</h1>
+<p>
+      @Html.ActionLink("Create New", "Create")
+</p>
+
+<form method="get" action="@Url.Action("UserIndex")" data-otf-ajax="true">
+
+    <div style="display: inline-block">
+        <input type="search" placeholder="Search" name="searchTerm" id="SearchBar" class="form-control" />
+    </div>
+
+    <div style="display: inline-block;">
+        <input type="submit" value="Search" id="SubmitButton" class="btn btn-default" />
+    </div>
+</form>
+
+<br />
+
+<div class="container-fluid">
+      <table class="table">
+            <tr>                                  
+                  <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                  </th>
+                  <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                  </th>
+                  <th>
+                        Author
+                  </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Genres)
+                </th>
+            </tr>
+
+
+            @foreach (var item in Model)
+                  {
+                        if (item.IsDeleted == false)
+                        {
+                        <tr>                              
+                              <td>
+                                    <div style=" width:200px;"><h5>@Html.ActionLink(@item.Title, "Details", new { id = item.Id })</h5></div>
+                              </td>
+                              <td>
+                                    <div class="row" style="height:100px; width:400px; overflow:scroll;">
+                                          @Html.DisplayFor(modelItem => item.Description)
+                                    </div>
+                              </td>
+                              <td>
+                                    <h5>@Html.DisplayFor(modelItem => item.Authors.FirstName)</h5>
+                                          <h5>@Html.DisplayFor(modelItem => item.Authors.LastName)</h5>
+                              </td>
+                            <td>
+                                <h5>@Html.DisplayFor(modelItem => item.Genres.Name)</h5>
+                            </td>
+
+                            @if (item.UserId == ViewBag.currentUser || ViewBag.admin)
+                            {
+                              <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                              </td>
+                            }
+                        </tr>
+                  }
+            }
+
+      </table>
+</div>

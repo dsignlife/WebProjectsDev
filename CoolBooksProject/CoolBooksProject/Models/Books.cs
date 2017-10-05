@@ -5,6 +5,7 @@ namespace CoolBooksProject.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.Mvc;
 
     public partial class Books
     {
@@ -37,6 +38,7 @@ namespace CoolBooksProject.Models
         public string Description { get; set; }
 
         [StringLength(50)]
+        //[Remote("IsISBNExists", "Books", ErrorMessage = "ISBN already exists")]
         public string ISBN { get; set; }
 
         public DateTime? PublishDate { get; set; }
