@@ -11,8 +11,8 @@ using System;
 namespace ASPNETPT.Migrations
 {
     [DbContext(typeof(BtcContext))]
-    [Migration("20170912185225_InitialDatabase")]
-    partial class InitialDatabase
+    [Migration("20171005075100_initialize")]
+    partial class initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

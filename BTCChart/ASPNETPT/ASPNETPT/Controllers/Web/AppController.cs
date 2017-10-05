@@ -17,16 +17,16 @@ namespace ASPNETPT.Controllers.Web
     public class AppController : Controller
 
     {
-        private IMailService _mailService;
+       // private IMailService _mailService;
         private IConfigurationRoot _config;
         private IBtcRepo _repo;
         private ILogger<AppController> _logger;
-       
 
 
-        public AppController(IMailService mailService, IConfigurationRoot config, IBtcRepo repo, ILogger<AppController> logger)
-       {
-           _mailService = mailService;
+
+        public AppController(IConfigurationRoot config, IBtcRepo repo, ILogger<AppController> logger) //IMailService mailService
+        {
+           //_mailService = mailService;
            _config = config;
             _repo = repo;
            _logger = logger;
@@ -39,7 +39,10 @@ namespace ASPNETPT.Controllers.Web
             try
             {
                 var data = _repo.GetBtCprops().OrderByDescending(x => x.Id).Take(5).ToList(); //show 10 result by id
-                
+
+                ViewBag.Data = data;
+
+
                 return View(data);
             }
             catch (Exception e)
@@ -67,7 +70,7 @@ namespace ASPNETPT.Controllers.Web
         {
             if (ModelState.IsValid)
             {
-                _mailService.SendMail(_config["MailSettings:ToAddress"], model.Email, "From Bitchart", model.Message);
+                //_mailService.SendMail(_config["MailSettings:ToAddress"], model.Email, "From Bitchart", model.Message);
 
                 ModelState.Clear();
                 ViewBag.UserMessage = "Message Sent";

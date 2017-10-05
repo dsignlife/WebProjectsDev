@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ASPNETPT.Controllers.Web.Services;
@@ -7,6 +8,8 @@ using ASPNETPT.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -14,17 +17,40 @@ using Microsoft.Extensions.Logging;
 
 namespace ASPNETPT
 {
+
+
+
     public class Startup
     {
         private IHostingEnvironment _env;
         private IConfigurationRoot _config;
+
+        //public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<BtcContext>
+        //{
+        //    public BtcContext CreateDbContext(string[] args)
+        //    {
+        //        IConfigurationRoot configuration = new ConfigurationBuilder()
+        //            .SetBasePath(Directory.GetCurrentDirectory())
+        //            .AddJsonFile("appsettings.json")
+        //            .Build();
+
+        //        var builder = new DbContextOptionsBuilder<BtcContext>();
+
+        //        var connectionString = configuration.GetConnectionString("BtcBackConnector");
+
+        //        builder.UseSqlServer(connectionString);
+
+        //        return new BtcContext(configuration, builder.Options);
+        //    }
+        //}
+
 
         public Startup(IHostingEnvironment env)
         {
             _env = env;
             var builder = new ConfigurationBuilder()
                 .SetBasePath(_env.ContentRootPath)
-                .AddJsonFile("config.json")
+                .AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables();
             _config = builder.Build();
 
@@ -35,14 +61,14 @@ namespace ASPNETPT
         {
 
             services.AddSingleton(_config);
-            if (_env.IsEnvironment("Development"))
-            {
-                services.AddScoped<IMailService, DebugMailService>();
-            }
-                  else
-            {
+            //if (_env.IsEnvironment("Development"))
+            //{
+            //    services.AddScoped<IMailService, DebugMailService>();
+            //}
+            //      else
+            //{
                 
-            }
+            //}
 
             services.AddDbContext<BtcContext>();
             services.AddScoped<IBtcRepo, BtcRepo>();
@@ -53,7 +79,7 @@ namespace ASPNETPT
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory factory) //Add BtcContextData seedData to update to db
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory factory, BtcContextData seedData) //Add BtcContextData seedData to update to db
         {
             
 

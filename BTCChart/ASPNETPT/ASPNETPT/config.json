@@ -1,9 +1,0 @@
-{
-  "MailSettings": {
-    "ToAdress": "test@test.com"
-  },
-  "ConnectionStrings": {
-    "BtcBackConnector": "Data Source=localhost;Initial Catalog=BTCback; MultipleActiveResultSets= true; User Id=sa; Password=tomz;" 
-  } 
-
-}

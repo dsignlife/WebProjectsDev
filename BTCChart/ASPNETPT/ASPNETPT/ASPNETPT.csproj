@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\Btcmvc - Web Deploy.pubxml" />
     <None Remove="Properties\PublishProfiles\dsignarchives - Web Deploy.pubxml" />
   </ItemGroup>
 

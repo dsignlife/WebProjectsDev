@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ASPNETPT.Controllers.Web.Services
 {
-    public interface IMailService
-    {
+    //public interface IMailService
+    //{
 
-        void SendMail(string to, string from, string subject, string body);
-    }
+    //    void SendMail(string to, string from, string subject, string body);
+    //}
 }

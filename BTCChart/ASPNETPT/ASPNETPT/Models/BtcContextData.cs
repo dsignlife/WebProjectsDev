@@ -20,10 +20,10 @@ namespace ASPNETPT.Models
 
 
 
-        //  INCASE FOR UPDATEING TO DATABASE BY WEB //no need with backend service.
+      //  INCASE FOR UPDATEING TO DATABASE BY WEB //no need with backend service.
 
         //    public async Task seedData()
-        //    {
+        //{
 
         //    var testList = new List<string>();
         //    var culture = CultureInfo.InvariantCulture;
@@ -50,9 +50,9 @@ namespace ASPNETPT.Models
         //    }
 
 
-        //    if (_context.Btcs.Any())
+        //    if (!_context.Btcs.Any())
         //    {
-        //        var data 
+        //        var data
         //             = new BtCprop()
         //             {
         //                 Name = testList[0],
@@ -74,53 +74,53 @@ namespace ASPNETPT.Models
         //}
 
 
-    //    public static void GetBtcsFromYahoo()
-    //    {
+        //    public static void GetBtcsFromYahoo()
+        //    {
 
-    //        var testList = new List<string>();
-    //        var culture = CultureInfo.InvariantCulture;
-    //        String URLString =
-    //            "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22BTCUSD%22)&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
-    //        XmlTextReader reader = new XmlTextReader(URLString);
+        //        var testList = new List<string>();
+        //        var culture = CultureInfo.InvariantCulture;
+        //        String URLString =
+        //            "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22BTCUSD%22)&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
+        //        XmlTextReader reader = new XmlTextReader(URLString);
 
-    //        while (reader.Read())
-    //        {
+        //        while (reader.Read())
+        //        {
 
-    //            switch (reader.NodeType)
-    //            {
-
-
-    //                case XmlNodeType.Text: //Display the text in each element.
-    //                    testList.Add(reader.Value);
-    //                    break;
+        //            switch (reader.NodeType)
+        //            {
 
 
-    //                default:
-    //                    break;
-
-    //            }
-    //        }
+        //                case XmlNodeType.Text: //Display the text in each element.
+        //                    testList.Add(reader.Value);
+        //                    break;
 
 
-    //                    var data= new BtCprop()
-    //                 {
-    //                     Name = testList[0],
-    //                     Rate = Convert.ToDouble(testList[1], culture),
-    //                     Date = testList[2],
-    //                     Time = testList[3],
-    //                     Ask = Convert.ToDouble(testList[4], culture),
-    //                     Bid = Convert.ToDouble(testList[5], culture)
+        //                default:
+        //                    break;
 
-    //                 };
-
-    //            _context.Btcs.Add(data);
-    //            _context.SaveChanges();
+        //            }
+        //        }
 
 
+        //                    var data= new BtCprop()
+        //                 {
+        //                     Name = testList[0],
+        //                     Rate = Convert.ToDouble(testList[1], culture),
+        //                     Date = testList[2],
+        //                     Time = testList[3],
+        //                     Ask = Convert.ToDouble(testList[4], culture),
+        //                     Bid = Convert.ToDouble(testList[5], culture)
 
-                             
+        //                 };
 
-    //}
+        //            _context.Btcs.Add(data);
+        //            _context.SaveChanges();
+
+
+
+
+
+        //}
 
 
 
