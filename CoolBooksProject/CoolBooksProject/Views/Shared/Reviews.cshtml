@@ -1,11 +1,14 @@
 ﻿@model CoolBooksProject.Models.Books
 
+@if (ViewBag.CurrentUser != null)
+{
 <div class="thumbnail">
     <div>
         <input type="button" value="Create Review" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Reviews", new { bookId = Model.Id })'" />
     </div >
 </div>
-   
+}
+
 <div id= "review" class="thumbnail">
     @foreach (var rev in @Model.Reviews)
     {

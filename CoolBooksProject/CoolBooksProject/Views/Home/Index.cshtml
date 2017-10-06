@@ -1,11 +1,11 @@
 ﻿@using CoolBooksProject.ViewModels;
 @model ListViewModel
 
-<div id="wrapper" class="row">
+<div id="wrapper" class="row thumbnail container-fluid" style="height:400px">
     <div class="col-md-3 col-md-offset-3 col-lg-3 col-lg-offset-3" style="float:left;">
-        <img src="@ViewBag.RandomBookImagePath" class="img-responsive img-thumbnail" width="250", onclick="location.href='@Url.Action("Details", "Home", new { id = ViewBag.RandomBookId })'"/>
+        <img src="@ViewBag.RandomBookImagePath" class="img-responsive img-thumbnail" style="height: 350px" onclick="location.href='@Url.Action("Details", "Home", new { id = ViewBag.RandomBookId })'"/>
     </div>
-    <div class="col-md-3 col-lg-3 thumbnail" style="top:50px; float:left ">
+    <div class="col-md-3 col-lg-3" style="top:50px; float:left; max-height:250px; overflow:auto ">
         <h5>@ViewBag.RandomBookTitle</h5>
         <h5>@ViewBag.RandomBookAuthor</h5>
         <h6>@ViewBag.RandomBookDescription</h6>
@@ -15,11 +15,11 @@
 <h1>Latest 3 Added Books</h1>
 <br />
 
-<div class="col-md-12">
-      <div class="col-md-5">
+
+      <div class="col-md-6">
             @foreach (var book in Model.Books)
             {
                   @Html.Partial("BookLastest", book)
             }
       </div>
-</div>
+

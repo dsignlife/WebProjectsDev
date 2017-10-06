@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using CoolBooksProject.Models;
 using CoolBooksProject.ViewModels;
 using Microsoft.AspNet.Identity;
+using System.Net.Mail;
 
 namespace CoolBooksProject.Controllers
 {
@@ -118,7 +119,7 @@ namespace CoolBooksProject.Controllers
 
         public ActionResult About()
         {
-            string aboutText = "This appliction serves as a CoolBookReviewer";
+            string aboutText = "This application serves as a CoolBookReviewer";
 
             ViewBag.Message = aboutText;
 
@@ -127,8 +128,48 @@ namespace CoolBooksProject.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult Contact([Bind(Include = "Subject,Name,Email,Message")] ContactViewModel contact)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    MailMessage msg = new MailMessage();
+
+                    msg.From = new MailAddress(contact.Email);
+                    msg.To.Add("contact.coolbooks@gmail.com");
+                    msg.Subject = contact.Subject;
+                    msg.Body = contact.Message+ "\nEmail: " + contact.Email + "\nName: " + contact.Name;
+
+                    SmtpClient smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        Credentials = new System.Net.NetworkCredential("contact.coolbooks@gmail.com", "Admin==1337"),
+                        EnableSsl = true
+                    };
+
+                    smtp.Send(msg);
+
+                    ModelState.Clear();
+                    ViewBag.Message = "Thank you for contacting us!";
+                }
+                catch(Exception ex)
+                {
+                    ModelState.Clear();
+                    ViewBag.Message = $"Sorry, a problem occurred {ex.Message}";
+                }
+            }
+
+            return View();
+        }
+
+        public ActionResult Error()
+        {
             return View();
         }
 
