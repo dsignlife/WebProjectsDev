@@ -1,12 +1,12 @@
 ﻿@model CoolBooksProject.Models.Books
 
 
-    <div class="  col-sm-4 col-lg-4 col-md-4" >
+    <div class=" col-sm-2 col-lg-2 col-md-2" >
     
-        <div class="container-fluid">
+        <div class="container">
             <img src="@Model.ImagePath" class="img-thumbnail" style="height: 150px; width: 100px;" onclick="location.href='@Url.Action("Details", "Home", new { id = Model.Id })'">
             <div class="caption" id="@Model.Id">
-                <h6 class="top-right">@Model.Genres.Name</h6><h6>@Html.ActionLink(@Model.Title, "Details", new { id = Model.Id }) </h6>
+                <h6 class="top">@Model.Genres.Name</h6><h6 style="line-height: 1px;">@Html.ActionLink(@Model.Title, "Details", new { id = Model.Id }) </h6>
             </div>
         </div>
     </div>

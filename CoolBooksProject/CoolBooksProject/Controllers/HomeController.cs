@@ -65,7 +65,7 @@ namespace CoolBooksProject.Controllers
             Latestbooks = db.Books.Where(b => b.IsDeleted == false)
                 .Include(b => b.Authors)
                 .Include(b => b.Genres)
-                .OrderByDescending(i => i.Id).Take(3);
+                .OrderByDescending(i => i.Id).Take(5);
 
             return View(new ListViewModel
             {
