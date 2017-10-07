@@ -1,7 +1,15 @@
 ﻿@model ListViewModel
 @using CoolBooksProject.ViewModels;
 
-    <h1>@Model.CurrentGenre</h1>
+@{
+    ViewBag.Title = @Model.CurrentGenre;
+    
+}
+
+
+
+
+<h1>@Model.CurrentGenre</h1>
     <br />
 
     @foreach (var book in Model.Books)
