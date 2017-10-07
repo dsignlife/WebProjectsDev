@@ -90,7 +90,7 @@ namespace ASPNETPT.Controllers.Web
 
             _repo.GetBtCdata();
 
-            return Content("Fetched Data");
+            return RedirectToAction("Index");
         }
     }
 }
