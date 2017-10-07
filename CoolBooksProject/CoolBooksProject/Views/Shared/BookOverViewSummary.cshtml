@@ -6,9 +6,11 @@
 <div class="col-sm-4 col-lg-4 col-md-4">
     <div class="thumbnail">
         <br />
-       <a href='@Url.Action("Details", "Home",new {id = Model.Id},null )'>
-    <img src="@Model.ImagePath" alt="" width="150" max-height="200px"/></a>
-        
+     
+            <a href='@Url.Action("Details", "Home",new {id = Model.Id},null )'>
+                <img src="@Model.ImagePath" alt="" style="width: 150px; height: 230px;" />
+            </a>
+                
 
      <div class="caption" id="@Model.Id">
                
