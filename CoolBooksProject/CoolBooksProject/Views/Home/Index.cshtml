@@ -6,27 +6,40 @@
     ViewBag.Title = "Home";
 }
 
-<div id="wrapper" class="row thumbnail container-fluid" style="height:400px">
-    <div class="col-md-3 col-md-offset-3 col-lg-3 col-lg-offset-3" style="float:left;">
-        <img src="@ViewBag.RandomBookImagePath" class="img-responsive img-thumbnail" style="height: 350px" onclick="location.href='@Url.Action("Details", "Home", new { id = ViewBag.RandomBookId })'"/>
-    </div>
-    <div class="col-md-3 col-lg-3" style="top:50px; float:left; max-height:250px; overflow:auto ">
-    
-        <h5>@Html.ActionLink((string) ViewBag.RandomBookTitle, "Details", new { id = ViewBag.RandomBookId}, null) </h5>
 
-        <h5>@ViewBag.RandomBookAuthor</h5>
-        <h6>@ViewBag.RandomBookDescription</h6>
-    </div>
-</div>
-<hr />
-<h1 class="text-center">Latest 5 Added Books</h1>
-<br />
+    <div id="wrapper" class="row thumbnail" style="height: 400px">
+        <div class="col-md-3 col-md-offset-3 col-lg-3 col-lg-offset-3" style="float:left;">
+            <img src="@ViewBag.RandomBookImagePath" class="img-responsive img-thumbnail" style="height: 350px" onclick="location.href='@Url.Action("Details", "Home", new { id = ViewBag.RandomBookId })'" />
+        </div>
+        <div class="col-md-6 col-lg-6 " style="top:50px; float: right; max-height: 250px; overflow:auto ">
 
+            <h5>@Html.ActionLink((string)ViewBag.RandomBookTitle, "Details", new { id = ViewBag.RandomBookId }, null) </h5>
 
-      <div class="col-lg-offset-2 container-fluid">
-            @foreach (var book in Model.Books)
-            {
-                  @Html.Partial("BookLastest", book)
-            }
+            <h5>@ViewBag.RandomBookAuthor</h5>
+            <h6>@ViewBag.RandomBookDescription</h6>
+
+        </div>
+        
       </div>
+
+
+
+<h1 class="row col-md-1 text-center">5 Latest Books </h1> 
+
+
+
+<div class="col-sm-offset-2 col-md-offset-2 container-fluid">
+    
+   
+
+
+    @foreach (var book in Model.Books)
+    {
+        @Html.Partial("BookLastest", book)
+    }
+    
+        
+    
+
+</div>
 

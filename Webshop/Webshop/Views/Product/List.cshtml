@@ -1,11 +1,11 @@
-﻿@*@model ProductsListViewModel
+﻿@model ProductsListViewModel
 
     <h1>@Model.CurrentCategory</h1>
 @foreach (var product in Model.Products)
 {
 
     @Html.Partial("ProductOverviewSummery", product)
-}*@
+}
 
 
 
@@ -13,7 +13,7 @@
     
 </div>
 
-@section scripts
+@*@section scripts
 {
     
     <script>
@@ -41,8 +41,7 @@
                         return;
                     }
 
-                    $.each(jsonData,
-                        function(index, product) {
+                    $.each(jsonData, function(index, product) {
 
                             var productSummaryString =
                            '<div class="col-sm-4 col-lg-4 col-md-4"> ' +
@@ -51,13 +50,13 @@
                                               '      <div class="caption">' +
                                               '         <h3 class="pull-right">' + product.price + '</h3>' +
                                               '         <h3>' +
-                                              '             <a href=/Pie/Details/' + product.productId + '>' + product.name + '</a>' +
+                                '             <a href=/Product/Details?id=' + product.productId + '>' + product.name + '</a>' +                      
                                               '         </h3>' +
                                               '         <p>' + product.shortDesc + '</p>' +
                                               '    </div>' +
                                               '    <div class="addToCart">' +
                                               '        <p class="button">' +
-                                              '             <a class="btn btn-primary" href=/ShoppingCart/AddToShoppingCart?pieId=' + product.productId + '>Add to cart</a>' +
+                                              '             <a class="btn btn-primary" href=/ShoppingCart/AddToShoppingCart?productId=' + product.productId + '>Add to cart</a>' +
                                               '         </p>' +
                                               '     </div>' +
                                               '  </div>' +
@@ -75,4 +74,4 @@
         }
 
     </script>
-}
+}*@
