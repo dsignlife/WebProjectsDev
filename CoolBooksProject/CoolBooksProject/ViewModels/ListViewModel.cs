@@ -13,6 +13,7 @@ namespace CoolBooksProject.ViewModels
         public IEnumerable<Genres> Genres { get; set; }
         public string CurrentGenre { get; set; }
         public string Genre { get; set; }
+      
 
     }
 }

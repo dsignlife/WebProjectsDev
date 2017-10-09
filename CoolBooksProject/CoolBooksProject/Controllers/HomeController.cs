@@ -68,7 +68,7 @@ namespace CoolBooksProject.Controllers
             {
                 
                 FiveTopBooks.Add(db.Books.Find(item.ID));
-                FiveTopRating.Add(Math.Round(Convert.ToDouble(item.Average)));
+                FiveTopRating.Add(Math.Round(Convert.ToDouble(item.Average),1)); // one decimal
             }
 
             
@@ -109,9 +109,13 @@ namespace CoolBooksProject.Controllers
             if (string.IsNullOrEmpty(genre))
             {
                 books = db.Books
+
+                    .Where(r => !r.IsDeleted)
                     .Include(b => b.Authors)
                     .Include(b => b.Genres)
+                    .Include(b => b.Reviews)
                     .OrderBy(b => b.Id);
+                 
                 currentGenre = "All Books";
             }
             else
@@ -126,6 +130,7 @@ namespace CoolBooksProject.Controllers
             return View(new ListViewModel
             {
                 Books = books,
+                
                 CurrentGenre = currentGenre
             });
         }
