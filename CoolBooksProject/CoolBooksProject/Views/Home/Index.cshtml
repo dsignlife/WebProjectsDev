@@ -7,20 +7,55 @@
 }
 
 
-    <div id="wrapper" class="row thumbnail" style="height: 400px">
-        <div class="col-md-3 col-md-offset-3 col-lg-3 col-lg-offset-3" style="float:left;">
-            <img src="@ViewBag.RandomBookImagePath" class="img-responsive img-thumbnail" style="height: 350px" onclick="location.href='@Url.Action("Details", "Home", new { id = ViewBag.RandomBookId })'" />
-        </div>
-        <div class="col-md-6 col-lg-6 " style="top:50px; float: right; max-height: 250px; overflow:auto ">
+<div id="wrapper" class="row thumbnail" style="height: 400px">
+    <div class="col-md-3 col-md-offset-3 col-lg-3 col-lg-offset-3" style="float:left;">
+        <img src="@ViewBag.RandomBookImagePath" class="img-responsive img-thumbnail" style="height: 350px" onclick="location.href='@Url.Action("Details", "Home", new { id = ViewBag.RandomBookId })'" />
+    </div>
+    <div class="col-md-6 col-lg-6 " style="top:50px; float: right; max-height: 250px; overflow:auto ">
 
-            <h5>@Html.ActionLink((string)ViewBag.RandomBookTitle, "Details", new { id = ViewBag.RandomBookId }, null) </h5>
+        <h5>@Html.ActionLink((string)ViewBag.RandomBookTitle, "Details", new { id = ViewBag.RandomBookId }, null) </h5>
 
-            <h5>@ViewBag.RandomBookAuthor</h5>
-            <h6>@ViewBag.RandomBookDescription</h6>
+        <h5>@ViewBag.RandomBookAuthor</h5>
+        <h6>@ViewBag.RandomBookDescription</h6>
 
-        </div>
+    </div>
         
-      </div>
+</div>
+
+
+
+<br />
+<h1 class="row col-md-1 text-center">Top Rated Books</h1>
+<br />
+@{
+    var toplist = new List<CoolBooksProject.Models.Books>();
+    toplist = ViewBag.TopBooks;
+    int counter = 0;
+
+}
+
+
+<div class="row">
+    <div class="col-sm-offset-2 col-md-offset-2 container-fluid">
+        @foreach (var book in toplist)
+        {
+           
+        
+<div class="col-sm-2 col-lg-2 col-md-2">
+    <div class="container-fluid">
+        <img src="@book.ImagePath" class="img-thumbnail" style="height: 150px; width: 100px;" onclick="location.href='@Url.Action("Details", "Home", new { id = book.Id })'">
+        <div class="caption" id="@book.Id">
+            <h6 class="top-right">Avg: @ViewBag.FiveTopRating[counter]</h6><h6>@Html.ActionLink(book.Title, "Details", new { id = book.Id }) </h6>
+        </div>
+    </div>
+</div>
+
+
+            counter++;
+        }
+    </div>
+</div>
+
 
 
 

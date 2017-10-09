@@ -50,6 +50,34 @@ namespace CoolBooksProject.Controllers
 
         public ActionResult Index()
         {
+
+            // Get top-ranked books
+            var HighestAvgReviews = db.Reviews.Where(r => !r.IsDeleted)
+                .GroupBy(r => new { ID = r.BookId })
+                .Select(g => new
+                {
+                    ID = g.Key.ID,
+                    Average = g.Average(p => p.Rating)
+                });
+            var FiveTop = HighestAvgReviews.OrderByDescending(q => q.Average).Take(5).ToList();
+            List<Books> FiveTopBooks = new List<Books>();
+            var FiveTopRating = new List<double>();
+
+           
+            foreach (var item in FiveTop)
+            {
+                
+                FiveTopBooks.Add(db.Books.Find(item.ID));
+                FiveTopRating.Add(Math.Round(Convert.ToDouble(item.Average)));
+            }
+
+            
+
+
+            ViewBag.TopBooks = FiveTopBooks;
+            ViewBag.FiveTopRating = FiveTopRating;
+
+
             // Setup a random book to be shown on front page
             Books randomBook = RandomBook();
             Authors randomBookAuthor = db.Authors.FirstOrDefault(a => a.Id == randomBook.AuthorId);

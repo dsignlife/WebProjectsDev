@@ -1,0 +1,9 @@
+﻿@model CoolBooksProject.Models.Books
+<div class="col-sm-2 col-lg-2 col-md-2">
+    <div class="container-fluid">
+        <img src="@Model.ImagePath" class="img-thumbnail" style="height: 150px; width: 100px;" onclick="location.href='@Url.Action("Details", "Home", new { id = Model.Id })'">
+        <div class="caption" id="@Model.Id">
+            <h6 class="top-right">@Model</h6><h6>@Html.ActionLink(@Model.Title, "Details", new { id = Model.Id }) </h6>
+        </div>
+    </div>
+</div>

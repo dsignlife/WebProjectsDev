@@ -699,6 +699,7 @@
     <Content Include="Views\Shared\Reviews.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Shared\AuthorBooks.cshtml" />
+    <Content Include="Views\Shared\TopRatedBooks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
