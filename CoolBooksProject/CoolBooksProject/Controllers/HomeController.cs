@@ -137,6 +137,11 @@ namespace CoolBooksProject.Controllers
 
         public ActionResult Details(int id)
         {
+
+            var rating = Math.Round(Convert.ToDouble(db.Reviews.Where(r => r.BookId == id && !r.IsDeleted)
+          .Average(r => r.Rating)));
+            ViewBag.Rating = rating;
+
             ViewBag.CurrentUser = User.Identity.GetUserId();
             ViewBag.admin = User.IsInRole("Admin");
             var books = db.Books.Include(r => r.Reviews).Include(a => a.AspNetUsers)

@@ -22,6 +22,7 @@ namespace CoolBooksProject.Models
         [StringLength(4000)]
         public string Text { get; set; }
 
+        [Range(0, 10, ErrorMessage = "Rating must be between 0-10")]
         public byte? Rating { get; set; }
 
         public DateTime Created { get; set; }
