@@ -122,7 +122,7 @@ namespace Webshop
             });
 
                 //seed.Seed(app);
-                DbInitializer.Seed(app);
+                //DbInitializer.Seed(app);
 
                      
 
