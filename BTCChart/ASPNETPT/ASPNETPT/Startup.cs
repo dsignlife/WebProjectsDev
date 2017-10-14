@@ -79,7 +79,7 @@ namespace ASPNETPT
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory factory, BtcContextData seedData) //Add BtcContextData seedData to update to db
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory factory) //Add BtcContextData seedData to update to db
         {
             
 
@@ -106,7 +106,7 @@ namespace ASPNETPT
         );
 
             //incase seedingData
-            //seedData.seedData().Wait();
+            //seedData().Wait();
 
            
 

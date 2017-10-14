@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Microsoft.ApplicationInsights.AspNetCore.TelemetryInitializers;
 using Microsoft.Extensions.Logging;
 
 namespace ASPNETPT.Models
@@ -34,7 +35,7 @@ namespace ASPNETPT.Models
 
 
             var testList = new List<string>();
-            var culture = CultureInfo.InvariantCulture;
+         
             String URLString =
                 "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22BTCUSD%22)&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
             XmlTextReader reader = new XmlTextReader(URLString);
@@ -61,11 +62,11 @@ namespace ASPNETPT.Models
             var data = new BtCprop()
             {
                 Name = testList[0],
-                Rate = Convert.ToDouble(testList[1], culture),
+                Rate = Convert.ToDecimal(testList[1], CultureInfo.InvariantCulture),
                 Date = testList[2],
                 Time = testList[3],
-                Ask = Convert.ToDouble(testList[4], culture),
-                Bid = Convert.ToDouble(testList[5], culture)
+                Ask =  testList[4], 
+                Bid =  testList[5],
 
             };
 
