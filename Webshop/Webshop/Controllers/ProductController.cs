@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Webshop.Models;
 using Webshop.ViewModels;
@@ -15,7 +13,6 @@ namespace Webshop.Controllers
         private readonly ICategoryRepository _categoryRepository;
         private readonly IProductRepository _productRepository;
 
-
         public ProductController(IProductRepository productRepository, ICategoryRepository categoryRepository)
 
         {
@@ -25,29 +22,22 @@ namespace Webshop.Controllers
 
         public ViewResult List(string category)
         {
-            
             IEnumerable<Product> products;
-            string currentCategory = string.Empty;
-
-            if (string.IsNullOrEmpty(category))
-            {
+            var currentCategory = string.Empty;
+            if (string.IsNullOrEmpty(category)) {
                 products = _productRepository.Products.OrderBy(p => p.ProductId);
                 currentCategory = "All Products";
             }
-            else
-            {
+            else {
                 products = _productRepository.Products
                     .Where(p => p.Category.CategoryName == category)
-                   .OrderBy(p => p.ProductId);
-                currentCategory = _categoryRepository.Categories.FirstOrDefault(c => c.CategoryName == category).CategoryName;
+                    .OrderBy(p => p.ProductId);
+                currentCategory = _categoryRepository.Categories.FirstOrDefault(c => c.CategoryName == category)
+                    .CategoryName;
             }
-      
-
-            return View(new ProductsListViewModel()
-            {
+            return View(new ProductsListViewModel {
                 Products = products,
                 CurrentCategory = currentCategory
-                
             });
         }
 
@@ -56,7 +46,6 @@ namespace Webshop.Controllers
             var product = _productRepository.GetProductById(id);
             if (product == null)
                 return NotFound();
-
             return View(product);
         }
     }

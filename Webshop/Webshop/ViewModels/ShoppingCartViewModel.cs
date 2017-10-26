@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Webshop.Models;
+﻿using Webshop.Models;
 
 namespace Webshop.ViewModels
 {
@@ -11,6 +6,5 @@ namespace Webshop.ViewModels
     {
         public ShoppingCart ShoppingCart { get; set; }
         public decimal ShoppingCartTotal { get; set; }
-        
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Webshop.TagHelpers
 {
@@ -17,8 +12,6 @@ namespace Webshop.TagHelpers
             output.TagName = "a";
             output.Attributes.SetAttribute("href", "mailto:" + Adress);
             output.Content.SetContent(Content);
-
-
         }
     }
 }

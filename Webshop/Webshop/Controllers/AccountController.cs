@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +8,11 @@ using Webshop.ViewModels;
 
 namespace Webshop.Controllers
 {
-
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
         public AccountController(UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager)
@@ -24,38 +20,31 @@ namespace Webshop.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {
-            return View(new LoginViewModel
-            {
+            return View(new LoginViewModel {
                 ReturnUrl = returnUrl
             });
         }
 
-        [HttpPost]
-        [AllowAnonymous]
+        [HttpPost, AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
             if (!ModelState.IsValid)
                 return View(loginViewModel);
-
             var user = await _userManager.FindByNameAsync(loginViewModel.UserName);
 
             //success 
-
-            if (user != null)
-            {
+            if (user != null) {
                 var result = await _signInManager.PasswordSignInAsync(user, loginViewModel.Password, false, false);
-                if (result.Succeeded)
-                {
+                if (result.Succeeded) {
                     if (string.IsNullOrEmpty(loginViewModel.ReturnUrl))
                         return RedirectToAction("Index", "Home");
-
                     return Redirect(loginViewModel.ReturnUrl);
                 }
             }
-
             ModelState.AddModelError("", "Username/password not found");
             return View(loginViewModel);
         }
@@ -66,20 +55,14 @@ namespace Webshop.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [AllowAnonymous]
+        [HttpPost, ValidateAntiForgeryToken, AllowAnonymous]
         public async Task<IActionResult> Register(LoginViewModel loginViewModel)
         {
-            if (ModelState.IsValid)
-            {
-                var user = new IdentityUser() { UserName = loginViewModel.UserName };
+            if (ModelState.IsValid) {
+                var user = new IdentityUser {UserName = loginViewModel.UserName};
                 var result = await _userManager.CreateAsync(user, loginViewModel.Password);
-
                 if (result.Succeeded)
-                {
                     return RedirectToAction("Index", "Home");
-                }
             }
             return View(loginViewModel);
         }
@@ -91,5 +74,4 @@ namespace Webshop.Controllers
             return RedirectToAction("Index", "Home");
         }
     }
-
 }

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace Webshop.Models
@@ -16,16 +13,11 @@ namespace Webshop.Models
             _appDbContext = appDbContext;
         }
 
-        public IEnumerable<Product> Products
-        {
-            get
-            {
-                return _appDbContext.Products.Include(c => c.Category);
-            }
+        public IEnumerable<Product> Products {
+            get { return _appDbContext.Products.Include(c => c.Category); }
         }
 
-        public IEnumerable<Product> ProductsOfTheWeek
-        {
+        public IEnumerable<Product> ProductsOfTheWeek {
             get { return _appDbContext.Products.Include(c => c.Category).Where(p => p.IsProductOfTheWeek); }
         }
 

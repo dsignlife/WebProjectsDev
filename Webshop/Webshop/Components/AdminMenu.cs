@@ -7,18 +7,16 @@ namespace Webshop.Components
     {
         public IViewComponentResult Invoke()
         {
-            var menuItems = new List<AdminMenuItem> { new AdminMenuItem()
-                {
+            var menuItems = new List<AdminMenuItem> {
+                new AdminMenuItem {
                     DisplayValue = "User management",
                     ActionValue = "UserManagement"
-
                 },
-                new AdminMenuItem()
-                {
+                new AdminMenuItem {
                     DisplayValue = "Role management",
                     ActionValue = "RoleManagement"
-                }};
-
+                }
+            };
             return View(menuItems);
         }
     }

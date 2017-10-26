@@ -1,16 +1,13 @@
 ﻿@model ProductsListViewModel
 
-    <h1>@Model.CurrentCategory</h1>
-@foreach (var product in Model.Products)
-{
-
+<h1>@Model.CurrentCategory</h1>
+@foreach (var product in Model.Products) {
     @Html.Partial("ProductOverviewSummery", product)
 }
 
 
+<div id = "productDiv">
 
-<div id="productDiv">
-    
 </div>
 
 @*@section scripts

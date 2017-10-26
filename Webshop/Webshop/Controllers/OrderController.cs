@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Webshop.Models;
 
@@ -11,10 +7,10 @@ using Webshop.Models;
 namespace Webshop.Controllers
 {
     public class OrderController : Controller
-        
+
     {
-        private ShoppingCart _shoppingCart;
-        private IOrderRepository _orderRepository;
+        private readonly IOrderRepository _orderRepository;
+        private readonly ShoppingCart _shoppingCart;
 
         public OrderController(IOrderRepository orderRepository, ShoppingCart shoppingCart)
         {
@@ -23,32 +19,24 @@ namespace Webshop.Controllers
         }
         // GET: /<controller>/
 
-     [Authorize]
+        [Authorize]
         public IActionResult Checkout()
         {
             return View();
         }
 
-
-        [HttpPost]
-        [Authorize]
+        [HttpPost, Authorize]
         public IActionResult Checkout(Order order)
         {
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = items;
-
             if (_shoppingCart.ShoppingCartItems.Count == 0)
-            {
                 ModelState.AddModelError("", "Empty cart, add some products");
-            }
-              
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid) {
                 _orderRepository.CreateOrder(order);
                 _shoppingCart.ClearCart();
                 return RedirectToAction("CheckoutComplete");
             }
-
             return View(order);
         }
 

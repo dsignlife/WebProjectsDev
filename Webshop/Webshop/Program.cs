@@ -17,13 +17,14 @@ namespace Webshop
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .UseDefaultServiceProvider(options =>
-                                           options.ValidateScopes = false)
+                    options.ValidateScopes = false)
                 .Build();
-
+        }
 
         //public static void Main(string[] args)
         //{

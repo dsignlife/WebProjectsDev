@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Webshop.Models
 {
@@ -7,7 +6,6 @@ namespace Webshop.Models
     {
         IEnumerable<Product> Products { get; }
         IEnumerable<Product> ProductsOfTheWeek { get; }
-
 
         Product GetProductById(int productId);
     }

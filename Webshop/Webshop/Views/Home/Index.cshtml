@@ -5,10 +5,9 @@
 <h2>Products of the week</h2>
 <h4>Our weekly selection - just for you!</h4>
 
-<div class="row">
+<div class = "row">
 
-    @foreach (var product in Model.ProductsOfTheWeek)
-    {
+    @foreach (var product in Model.ProductsOfTheWeek) {
         @Html.Partial("ProductOfTheWeekSummary", product)
     }
 

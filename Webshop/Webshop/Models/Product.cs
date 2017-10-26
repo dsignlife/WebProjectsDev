@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Webshop.Models
+﻿namespace Webshop.Models
 {
     public class Product
     {
@@ -22,7 +14,5 @@ namespace Webshop.Models
         public bool InStock { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
-
-
     }
 }

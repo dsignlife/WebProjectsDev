@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Webshop.Models;
 using Webshop.ViewModels;
 
@@ -12,28 +8,19 @@ namespace Webshop.Controllers
 {
     public class HomeController : Controller
     {
-
-        private IProductRepository _productRepository;
+        private readonly IProductRepository _productRepository;
 
         public HomeController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
         }
 
-
-
-
-
-
         // GET: /<controller>/
         public IActionResult Index()
         {
-
-            var homeViewModel = new HomeViewModel
-            {
+            var homeViewModel = new HomeViewModel {
                 ProductsOfTheWeek = _productRepository.ProductsOfTheWeek
             };
-
             return View(homeViewModel);
         }
     }
