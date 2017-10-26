@@ -259,6 +259,8 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+*.sqite
+*.ide
 /Webshop/Webshop/appsettings.production.json
 /Webshop/Webshop/Properties/PublishProfiles
 /CoolBooksProject/CoolBooksProject/Properties/PublishProfiles
