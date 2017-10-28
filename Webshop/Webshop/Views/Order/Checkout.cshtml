@@ -1,12 +1,9 @@
 ﻿@model Order
-
 <form asp-action="Checkout" method="post" class="form-horizontal" role="form">
     <h2>Order Form</h2>
     <br />
-
     <div asp-validation-summary="All" class="text-danger">
     </div>
-
     <div class="form-group">
         <label asp-for="FirstName" class="col-md-2 control-label">
         </label>
@@ -16,7 +13,6 @@
             </span>
         </div>
     </div>
-
     <div class="form-group">
         <label asp-for="LastName" class="col-md-2 control-label">
         </label>
@@ -26,7 +22,6 @@
             </span>
         </div>
     </div>
-
     <div class="form-group">
         <label asp-for="AddressLine1" class="col-md-2 control-label">
         </label>
@@ -36,7 +31,6 @@
             </span>
         </div>
     </div>
-
     <div class="form-group">
         <label asp-for="AddressLine2" class="col-md-2 control-label">
         </label>
@@ -46,7 +40,6 @@
             </span>
         </div>
     </div>
-
     <div class="form-group">
         <label asp-for="ZipCode" class="col-md-2 control-label">
         </label>
@@ -56,7 +49,6 @@
             </span>
         </div>
     </div>
-
     <div class="form-group">
         <label asp-for="City" class="col-md-2 control-label">
         </label>
@@ -66,7 +58,6 @@
             </span>
         </div>
     </div>
-
     <div class="form-group">
         <label asp-for="State" class="col-md-2 control-label">
         </label>
@@ -76,7 +67,6 @@
             </span>
         </div>
     </div>
-
     <div class="form-group">
         <label asp-for="Country" class="col-md-2 control-label">
         </label>
@@ -86,7 +76,6 @@
             </span>
         </div>
     </div>
-
     <div class="form-group">
         <label asp-for="PhoneNumber" class="col-md-2 control-label">
         </label>
@@ -96,7 +85,6 @@
             </span>
         </div>
     </div>
-
     <div class="form-group">
         <label asp-for="Email" class="col-md-2 control-label">
         </label>
@@ -106,11 +94,9 @@
             </span>
         </div>
     </div>
-
     <div class="form-group">
         <div class="col-md-offset-2 col-md-5">
             <input type="submit" class="btn btn-primary" value="Complete Order" />
         </div>
     </div>
-
 </form>

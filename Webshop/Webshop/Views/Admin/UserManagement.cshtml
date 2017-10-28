@@ -1,7 +1,6 @@
-﻿@model IEnumerable<IdentityUser>
-
+﻿
+@model IEnumerable<ApplicationUser>
 <h2>User management</h2>
-
 @if (!Model.Any()) {
     <tr>
         <td colspan="3" class="text-center">
@@ -10,7 +9,7 @@
     </tr>
 }
 else {
-    <table class="table table-condensed table-bordered" header header-content="User Management">
+    <table class="table table-condensed table-bordered" header header-content="User Management" style="background: whitesmoke">
         <tr>
             <th>User ID</th>
             <th>User name</th>
@@ -36,7 +35,6 @@ else {
         }
     </table>
 }
-
 <a class="btn btn-primary" asp-action="AddUser">
     Add new user
 </a>

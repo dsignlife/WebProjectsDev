@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Webshop.Auth;
 using Webshop.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -11,11 +12,11 @@ namespace Webshop.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AccountController(UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -59,7 +60,7 @@ namespace Webshop.Controllers
         public async Task<IActionResult> Register(LoginViewModel loginViewModel)
         {
             if (ModelState.IsValid) {
-                var user = new IdentityUser {UserName = loginViewModel.UserName};
+                var user = new ApplicationUser { UserName = loginViewModel.UserName};
                 var result = await _userManager.CreateAsync(user, loginViewModel.Password);
                 if (result.Succeeded)
                     return RedirectToAction("Index", "Home");

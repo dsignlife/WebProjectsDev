@@ -1,5 +1,4 @@
 ﻿@model Product
-
 <div class="col-sm-4 col-lg-4 col-md-4">
     <div class="thumbnail">
         <img src="@Model.ImageThumbnailUrl" alt="">
@@ -12,11 +11,9 @@
             <p>@Model.ShortDesc</p>
         </div>
         <div class="addToCart">
-
             <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart" asp-route-productId="@Model.ProductId">
                 Add to cart
             </a>
-
         </div>
         <br />
     </div>
