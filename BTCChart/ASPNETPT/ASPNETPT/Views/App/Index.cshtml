@@ -1,5 +1,4 @@
-﻿@using ASPNETPT.Controllers.Web
-@using ASPNETPT.Models
+﻿@using ASPNETPT.Models
 @model IEnumerable<ASPNETPT.Models.BtCprop>
 
 
@@ -11,80 +10,73 @@
 }
 
 <div class="row">
-  
-    <div class ="col-md-6 col-lg-6 col-sm-6">
-        
+
+    <div class="col-md-6 col-lg-6 col-sm-6">
+
         <h3>Coin stats</h3>
         <p>BTC Fetch</p>
 
-
         <div>
-                @Html.ActionLink("Fetch", "Fetch", "App", null, new { @class = "btn btn-primary btn-large" })
-            </div>
+            @Html.ActionLink("Fetch", "Fetch", "App", null, new { @class = "btn btn-primary btn-large" })
+        </div>
 
-       
     </div>
-    
+
     <div class="col-md-6 col-lg-6 col-sm-12">
         <h2>BTC Datas</h2>
-        
-       @{ 
-
-        <ul>       
-            
-            @foreach (var item in Model)
-        {
-            <li>BTC Rate:@item.Rate Ask:@item.Ask Bid:@item.Bid Time: @item.Date @item.Time</li>
-
-            rateList.Add(item);
-            
-        }
-        </ul>
+        @{
+            <ul>
+                @foreach (var item in Model) {
+                    <li>BTC Rate:@item.Rate Ask:@item.Ask Bid:@item.Bid Time: @item.Date @item.Time</li>
+                    rateList.Add(item);
+                }
+            </ul>
         }
     </div>
 
 </div>
 
+<div class="col-md-12 col-lg-12 col-sm-12  ">
 
+    <div id="columnchart_values" class="chart_wrap">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
 
-            <div class="col-md-12 col-lg-12 col-sm-12  ">
-                
-            <div id="columnchart_values" class="chart_wrap">
-                <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-                <script type="text/javascript">
+            google.charts.load("current", { packages: ['corechart'] });
+            google.charts.setOnLoadCallback(drawChart);
 
-  google.charts.load("current", {packages:['corechart']});
-  google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ["DateTime", "Rate"],
-        ["@rateList[0].Date @rateList[0].Time", @rateList[0].Rate],
-        ["@rateList[1].Date @rateList[1].Time", @rateList[1].Rate],
-        ["@rateList[2].Date @rateList[2].Time", @rateList[2].Rate],
-        ["@rateList[3].Date @rateList[3].Time", @rateList[3].Rate],
-        ["@rateList[4].Date @rateList[4].Time", @rateList[4].Rate]
-      ]);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ["DateTime", "Rate"],
+                    ["@rateList[0].Date @rateList[0].Time", @rateList[0].Rate],
+                    ["@rateList[1].Date @rateList[1].Time", @rateList[1].Rate],
+                    ["@rateList[2].Date @rateList[2].Time", @rateList[2].Rate],
+                    ["@rateList[3].Date @rateList[3].Time", @rateList[3].Rate],
+                    ["@rateList[4].Date @rateList[4].Time", @rateList[4].Rate]
+                ]);
 
-      var view = new google.visualization.DataView(data);
-      view.setColumns([0, 1,
-                       { calc: "stringify",
-                         sourceColumn: 1,
-                         type: "string",
-                         role: "annotation" }
-                       ]);
+                var view = new google.visualization.DataView(data);
+                view.setColumns([
+                    0, 1,
+                    {
+                        calc: "stringify",
+                        sourceColumn: 1,
+                        type: "string",
+                        role: "annotation"
+                    }
+                ]);
 
-      var options = {
-        title: "Bitchart",
-        width: 600,
-        height: 400,
-        bar: {groupWidth: "95%"},
-        legend: { position: "none" },
-      };
-      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
-      chart.draw(view, options);
-  }
+                var options = {
+                    title: "Bitchart",
+                    width: 600,
+                    height: 400,
+                    bar: { groupWidth: "95%" },
+                    legend: { position: "none" },
+                };
+                var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+                chart.draw(view, options);
+            }
 
-                </script>
-            </div>
-        </div>
-
+        </script>
+    </div>
+</div>

@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace ASPNETPT.Models
 {
     public class BtcContext : DbContext
-        {
-        private IConfigurationRoot _config;
-
+    {
+        private readonly IConfigurationRoot _config;
 
         public BtcContext(IConfigurationRoot config, DbContextOptions options) : base(options)
         {

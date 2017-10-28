@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using SQLitePCL;
+﻿using System.Collections.Generic;
 
 namespace ASPNETPT.Models
 {
@@ -18,9 +11,7 @@ namespace ASPNETPT.Models
             _context = context;
         }
 
-
-
-      //  INCASE FOR UPDATEING TO DATABASE BY WEB //no need with backend service.
+        //  INCASE FOR UPDATEING TO DATABASE BY WEB //no need with backend service.
 
         //    public async Task seedData()
         //{
@@ -37,18 +28,15 @@ namespace ASPNETPT.Models
         //        switch (reader.NodeType)
         //        {
 
-
         //            case XmlNodeType.Text: //Display the text in each element.
         //                testList.Add(reader.Value);
         //                break;
-
 
         //            default:
         //                break;
 
         //        }
         //    }
-
 
         //    if (!_context.Btcs.Any())
         //    {
@@ -66,13 +54,10 @@ namespace ASPNETPT.Models
 
         //        _context.Btcs.Add(data);
 
-
-
         //        await _context.SaveChangesAsync();
 
         //    }
         //}
-
 
         //    public static void GetBtcsFromYahoo()
         //    {
@@ -89,18 +74,15 @@ namespace ASPNETPT.Models
         //            switch (reader.NodeType)
         //            {
 
-
         //                case XmlNodeType.Text: //Display the text in each element.
         //                    testList.Add(reader.Value);
         //                    break;
-
 
         //                default:
         //                    break;
 
         //            }
         //        }
-
 
         //                    var data= new BtCprop()
         //                 {
@@ -116,19 +98,11 @@ namespace ASPNETPT.Models
         //            _context.Btcs.Add(data);
         //            _context.SaveChanges();
 
-
-
-
-
         //}
-
-
 
         public IEnumerable<BtCprop> GetBtcs()
         {
             return _context.Set<BtCprop>();
         }
-
     }
 }
-    

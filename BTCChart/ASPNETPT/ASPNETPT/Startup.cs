@@ -14,12 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-
 namespace ASPNETPT
 {
-
-
-
     public class Startup
     {
         private IHostingEnvironment _env;
@@ -44,22 +40,20 @@ namespace ASPNETPT
         //    }
         //}
 
-
         public Startup(IHostingEnvironment env)
         {
             _env = env;
             var builder = new ConfigurationBuilder()
                 .SetBasePath(_env.ContentRootPath)
                 .AddJsonFile("appsettings.json")
-                .AddEnvironmentVariables();
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true);
             _config = builder.Build();
-
         }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddSingleton(_config);
             //if (_env.IsEnvironment("Development"))
             //{
@@ -67,49 +61,38 @@ namespace ASPNETPT
             //}
             //      else
             //{
-                
-            //}
 
+            //}
             services.AddDbContext<BtcContext>();
             services.AddScoped<IBtcRepo, BtcRepo>();
             services.AddTransient<BtcContextData>();
-
             services.AddLogging();
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory factory) //Add BtcContextData seedData to update to db
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,
+            ILoggerFactory factory) //Add BtcContextData seedData to update to db
         {
-            
-
-            if (env.IsDevelopment())
-            {
+            if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
                 factory.AddDebug(LogLevel.Information);
             }
-            else
-            {
+            else {
                 factory.AddDebug(LogLevel.Error);
             }
-
-            
             app.UseStaticFiles();
-            app.UseMvc(config =>
-                {
+            app.UseMvc(config => {
                     config.MapRoute(
                         name: "Default",
                         template: "{controller}/{action}/{id?}",
-                        defaults: new {controller = "App", action = "Index"}
+                        defaults: new { controller = "App", action = "Index" }
                     );
                 }
-        );
+            );
 
             //incase seedingData
             //seedData().Wait();
-
-           
-
         }
     }
 }

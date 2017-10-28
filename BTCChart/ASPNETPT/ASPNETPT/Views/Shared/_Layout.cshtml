@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <title>COIN STATS @ViewBag.Title</title>
-   
+
     <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
-@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">*@
-    <link rel="stylesheet" href="~/css/site.css"/>
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">*@
+    <link rel="stylesheet" href="~/css/site.css" />
 
 </head>
 
@@ -16,21 +16,26 @@
 <div id="sidebar">
     <div class="text-center">
         <img src="~/img/tomz.jpg" alt="head" class="face center-block" />
-        
+
         <span id="username">Tomz P</span>
     </div>
     <ul class="nav">
-        <li class="active"><a asp-controller="App" asp-action="Index" >Home</a></li>
-        <li><a asp-controller="App" asp-action="About">About</a></li>
-        <li><a asp-controller="App" asp-action="Contact">Contact</a></li>
+        <li class="active">
+            <a asp-controller="App" asp-action="Index">Home</a>
+        </li>
+        <li>
+            <a asp-controller="App" asp-action="About">About</a>
+        </li>
+        <li>
+            <a asp-controller="App" asp-action="Contact">Contact</a>
+        </li>
     </ul>
 </div>
-
 
 <div id="wrapper">
     <nav class="navbar navbar-inverse" role="navigation">
         <div class="container-fluid">
-            <ul class ="nav navbar-nav navbar-left">
+            <ul class="nav navbar-nav navbar-left">
                 <li>
                     <button id="sToggle" class="btn btn-lg">
                         <i class="fa fa-angle-left"></i>
@@ -44,7 +49,7 @@
                         <i class="fa fa-save"></i> Save
                     </a>
                 </li>
-                                <li>
+                <li>
                     <a href="#" class="btn btn-sm">
                         <i class="fa fa-print"></i> Print
                     </a>
@@ -57,18 +62,15 @@
         @RenderBody()
     </div>
 
-
     <div id="footer" class="container-fluid">
         <div class="navbar navbar-inverse navbar-fixed-bottom">
             <h4 class="text-center text-white">&copy; 2017 Tomz's BTC's Stats</h4>
         </div>
-        
+
     </div>
 </div>
-    
-    
 
-<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>  
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/react-bootstrap/react-bootstrap.min.js"></script>
 <script type="text/javascript" src="~/js/site.js"></script>
 
@@ -76,5 +78,3 @@
 
 </body>
 </html>
-
-

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ASPNETPT.Models
+﻿namespace ASPNETPT.Models
 {
     public class BtCprop
     {
@@ -16,8 +10,6 @@ namespace ASPNETPT.Models
         public string Ask { get; set; }
         public string Bid { get; set; }
 
-
         //public ICollection<BtCprop> Btc { get; set; }
-
     }
 }

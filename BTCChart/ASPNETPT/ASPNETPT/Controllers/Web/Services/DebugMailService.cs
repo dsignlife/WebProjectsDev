@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ASPNETPT.Controllers.Web.Services
+﻿namespace ASPNETPT.Controllers.Web.Services
 {
     //public class DebugMailService : IMailService
 
