@@ -1,4 +1,51 @@
-﻿<h2>Webshop's contact form</h2>
-<p>Test</p>
-<email adress="info@@test.com" content="Contact us">
-</email>
+﻿@model ContactViewModel
+<h2>Webshop's contact form</h2>
+<form asp-controller="Contact" asp-action="Index" method="post" class="form-horizontal" role="form">
+    <h4></h4>
+    <hr />
+    <div asp-validation-summary="All" class="text-danger">
+    </div>
+    <div class="form-group">
+        <label asp-for="Name" class="col-md-2 control-label">
+        </label>
+        <div class="col-md-10">
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger">
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="col-md-2 control-label">
+        </label>
+        <div class="col-md-10">
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger">
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Subject" class="col-md-2 control-label">
+        </label>
+        <div class="col-md-10">
+            <input asp-for="Subject" class="form-control" />
+            <span asp-validation-for="Subject" class="text-danger">
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Message" class="col-md-2 control-label">
+        </label>
+        <div class="col-md-10">
+            <textarea asp-for="Message" rows="4" cols="40" class="form-control" ></textarea>
+            <span asp-validation-for="Message" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Send" />
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary">
+                Cancel
+            </a>
+        </div>
+    </div>
+</form>
