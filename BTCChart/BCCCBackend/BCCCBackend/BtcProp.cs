@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace BCCCBackend
 {
-
     [Table(Name = "BTC")]
     class BtcProp
     {
@@ -17,7 +16,5 @@ namespace BCCCBackend
         public string Time { get; set; }
         public double Ask { get; set; }
         public double Bid { get; set; }
-        
-        
     }
 }

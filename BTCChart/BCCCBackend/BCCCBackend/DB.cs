@@ -15,33 +15,20 @@ namespace BCCCBackend
         public static SqlConnection GetConnect()
         {
             string cs =
-              @"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=BTCBack;Data Source = localhost\SQLEXPRESS";
+                @"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=BTCBack;Data Source = localhost\SQLEXPRESS";
             SqlConnection connection = new SqlConnection(cs);
             connection.Open();
             Write("Connecting established : ");
-
-
-            
-
             return connection;
-
-
-
         }
 
-        public static void Show()
-
-        {
-           
-        }
+        public static void Show() { }
 
         public static void Update(SqlConnection connection, BtcProp data)
-                
-        {
 
+        {
             string sql = "INSERT INTO Btcs(Name,Rate,Date,Time,Ask,Bid) VALUES(@name,@rate,@date,@time,@ask,@bid)";
             SqlCommand cmd = new SqlCommand(sql, connection);
-
             cmd.Parameters.AddWithValue("@name", data.Name);
             cmd.Parameters.AddWithValue("@rate", data.Rate);
             cmd.Parameters.AddWithValue("@date", data.Date);
@@ -50,11 +37,7 @@ namespace BCCCBackend
             cmd.Parameters.AddWithValue("@bid", data.Bid);
             cmd.CommandType = CommandType.Text;
             cmd.ExecuteNonQuery();
-
-
             connection.Close();
-           
         }
     }
 }
-
