@@ -30,10 +30,10 @@ namespace Webshop.Controllers
             }
             else {
                 products = _productRepository.Products
-                    .Where(p => p.Category.CategoryName == category)
-                    .OrderBy(p => p.ProductId);
+                                             .Where(p => p.Category.CategoryName == category)
+                                             .OrderBy(p => p.ProductId);
                 currentCategory = _categoryRepository.Categories.FirstOrDefault(c => c.CategoryName == category)
-                    .CategoryName;
+                                                     .CategoryName;
             }
             return View(new ProductsListViewModel {
                 Products = products,

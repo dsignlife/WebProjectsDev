@@ -10,12 +10,10 @@ namespace Webshop.ViewModels
         [Required(ErrorMessage = "Name required")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Email required")]
-        [EmailAddress]
+        [Required(ErrorMessage = "Email required"), EmailAddress]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "ERROR")]
-        [StringLength(4096, MinimumLength = 10)]
+        [Required(ErrorMessage = "ERROR"), StringLength(4096, MinimumLength = 10)]
         public string Message { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Mail;
 using Microsoft.AspNetCore.Mvc;
 using Webshop.ViewModels;
@@ -19,38 +20,27 @@ namespace Webshop.Controllers
         public IActionResult Index([Bind("Subject,Name,Email,Message")] ContactViewModel contact)
         {
             if (ModelState.IsValid)
-            {
-                try
-                {
-                    MailMessage msg = new MailMessage();
-
+                try {
+                    var msg = new MailMessage();
                     msg.From = new MailAddress(contact.Email);
                     msg.To.Add("contact.webproject@gmail.com");
                     msg.Subject = contact.Subject;
                     msg.Body = contact.Message + "\nEmail: " + contact.Email + "\nName: " + contact.Name;
-
-                    SmtpClient smtp = new SmtpClient
-                    {
+                    var smtp = new SmtpClient {
                         Host = "smtp.gmail.com",
                         Port = 587,
-                        Credentials = new System.Net.NetworkCredential("contact.webproject@gmail.com", "Admin=1337"),
+                        Credentials = new NetworkCredential("contact.webproject@gmail.com", "Admin=1337"),
                         EnableSsl = true
                     };
-
                     smtp.Send(msg);
-
                     ModelState.Clear();
                     ViewBag.Message = "Thank you for contacting us!";
                 }
-                catch (Exception ex)
-                {
+                catch (Exception ex) {
                     ModelState.Clear();
                     ViewBag.Message = $"Sorry, a problem occurred {ex.Message}";
                 }
-            }
-
             return View();
         }
     }
-    
 }

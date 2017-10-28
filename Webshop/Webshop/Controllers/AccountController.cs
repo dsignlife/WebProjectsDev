@@ -60,7 +60,7 @@ namespace Webshop.Controllers
         public async Task<IActionResult> Register(LoginViewModel loginViewModel)
         {
             if (ModelState.IsValid) {
-                var user = new ApplicationUser { UserName = loginViewModel.UserName};
+                var user = new ApplicationUser { UserName = loginViewModel.UserName };
                 var result = await _userManager.CreateAsync(user, loginViewModel.Password);
                 if (result.Succeeded)
                     return RedirectToAction("Index", "Home");
