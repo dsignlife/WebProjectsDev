@@ -31,18 +31,24 @@ namespace Webshop
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>(options => {
-                    //options.Password.RequiredLength = 8;
-                    //options.Password.RequireNonAlphanumeric = true;
-                    //options.Password.RequireUppercase = true;
-                    options.User.RequireUniqueEmail = true;
-                })
-                .AddEntityFrameworkStores<AppDbContext>();
+                        //options.Password.RequiredLength = 8;
+                        //options.Password.RequireNonAlphanumeric = true;
+                        //options.Password.RequireUppercase = true;
+                        options.User.RequireUniqueEmail = true;
+                    })
+                    .AddEntityFrameworkStores<AppDbContext>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(ShoppingCart.GetCart);
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddMvc();
+            // Claims based
+            services.AddAuthorization(options => {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("DeleteProduct", policy => policy.RequireClaim("Delete Product", "Delete Product"));
+                options.AddPolicy("AddProduct", policy => policy.RequireClaim("Add Product", "Add Product"));
+            });
             services.AddMemoryCache();
             services.AddSession();
         }
@@ -67,7 +73,7 @@ namespace Webshop
                 routes.MapRoute(
                     "categoryfilter",
                     "Product/{action}/{category?}",
-                    new {Controller = "Product", action = "List"});
+                    new { Controller = "Product", action = "List" });
                 routes.MapRoute(
                     "default",
                     "{controller=Home}/{action=Index}/{id?}");

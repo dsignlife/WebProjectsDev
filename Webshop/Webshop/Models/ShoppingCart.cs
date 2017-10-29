@@ -26,13 +26,14 @@ namespace Webshop.Models
             var context = services.GetService<AppDbContext>();
             var cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
             session.SetString("CartId", cartId);
-            return new ShoppingCart(context) {ShoppingCartId = cartId};
+            return new ShoppingCart(context) { ShoppingCartId = cartId };
         }
 
         public void AddToCart(Product product, int amount)
         {
             var shoppingCartItem = _appDbContext.ShoppingCartItems.SingleOrDefault(
-                s => s.Product.ProductId == product.ProductId && s.ShoppingCartId == ShoppingCartId);
+                s => s.Product.ProductId == product.ProductId &&
+                     s.ShoppingCartId == ShoppingCartId);
             if (shoppingCartItem == null) {
                 shoppingCartItem = new ShoppingCartItem {
                     ShoppingCartId = ShoppingCartId,
@@ -70,8 +71,8 @@ namespace Webshop.Models
             return ShoppingCartItems ??
                    (ShoppingCartItems =
                        _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
-                           .Include(s => s.Product)
-                           .ToList());
+                                    .Include(s => s.Product)
+                                    .ToList());
         }
 
         public void ClearCart()
@@ -86,7 +87,7 @@ namespace Webshop.Models
         public decimal GetShoppingCartTotal()
         {
             var total = _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
-                .Select(c => c.Product.Price * c.Amount).Sum();
+                                     .Select(c => c.Product.Price * c.Amount).Sum();
             return total;
         }
     }

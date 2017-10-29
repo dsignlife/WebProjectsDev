@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Webshop.ViewModels
@@ -20,5 +21,7 @@ namespace Webshop.ViewModels
         public string City { get; set; }
 
         public string Country { get; set; }
+
+        public List<string> UserClaims { get; set; }
     }
 }

@@ -8,5 +8,9 @@ namespace Webshop.Models
         IEnumerable<Product> ProductsOfTheWeek { get; }
 
         Product GetProductById(int productId);
+
+        void CreateProduct(Product product);
+
+        void UpdateProduct(Product product);
     }
 }

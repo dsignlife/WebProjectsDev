@@ -14,9 +14,9 @@ namespace Webshop.Models
             {
                 if (categories == null) {
                     var genresList = new[] {
-                        new Category {CategoryName = "Fruit pies"},
-                        new Category {CategoryName = "Cheese cakes"},
-                        new Category {CategoryName = "Seasonal pies"}
+                        new Category { CategoryName = "Type1" },
+                        new Category { CategoryName = "Type2" },
+                        new Category { CategoryName = "Type3" }
                     };
                     categories = new Dictionary<string, Category>();
                     foreach (var genre in genresList)

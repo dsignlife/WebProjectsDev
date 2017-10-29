@@ -50,13 +50,12 @@ namespace Webshop.Controllers
             return View(loginViewModel);
         }
 
-        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
         }
 
-        [HttpPost, ValidateAntiForgeryToken, AllowAnonymous]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(LoginViewModel loginViewModel)
         {
             if (ModelState.IsValid) {
@@ -73,6 +72,11 @@ namespace Webshop.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

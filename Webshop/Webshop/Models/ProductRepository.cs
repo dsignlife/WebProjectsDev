@@ -25,5 +25,17 @@ namespace Webshop.Models
         {
             return _appDbContext.Products.FirstOrDefault(p => p.ProductId == productId);
         }
+
+        public void UpdateProduct(Product product)
+        {
+            _appDbContext.Products.Update(product);
+            _appDbContext.SaveChanges();
+        }
+
+        public void CreateProduct(Product product)
+        {
+            _appDbContext.Products.Add(product);
+            _appDbContext.SaveChanges();
+        }
     }
 }
