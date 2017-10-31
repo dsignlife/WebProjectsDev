@@ -49,13 +49,13 @@ namespace Webshop.Controllers
             ModelState.AddModelError("", "Username/password not found");
             return View(loginViewModel);
         }
-
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
         }
 
-        [HttpPost, ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken, AllowAnonymous]
         public async Task<IActionResult> Register(LoginViewModel loginViewModel)
         {
             if (ModelState.IsValid) {

@@ -6,35 +6,43 @@
     </tr>
 }
 else {
-    <table class="table table-condensed table-bordered">
-        <tr>
-            <th>Product ID</th>
-            <th>Image</th>
-            <th>Name</th>
-            <th>In stock</th>
-            <th>Price</th>
-            <th>Actions</th>
-        </tr>
-        @foreach (var product in Model) {
-            <tr>
-                <td>@product.ProductId</td>
-                <td>
-                    <img src="@product.ImageThumbnailUrl" />
-                </td>
-                <td>@product.Name</td>
-                <td><input type="checkbox" asp-for="@product.InStock" />
-                <td>@product.Price</td>
-                <td>
-                    <form asp-action="DeleteProduct" asp-route-productId="@product.ProductId" method="post">
-                        <a class="btn btn-sm btn-primary" asp-action="EditProduct" asp-route-productId="@product.ProductId">Edit</a>
-                        <button type="submit" onclick="return confirm('Do you really want to delete this product?');" class="btn btn-sm btn-danger">
-                            Delete
-                        </button>
-                    </form>
-                </td>
+    <div class="container-fluid ">
+        <table class="table col-md-12" style="background: whitesmoke">
+            <tr cl>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>In stock</th>
+                <th>Actions</th>
             </tr>
-        }
-    </table>
+            @foreach (var product in Model) {
+                <tr>
+                    <td>@product.ProductId</td>
+                    <td class="img-thumbnail">
+                        <img src="@product.ImageThumbnailUrl" style="max-height: 150px; max-width: 150px;" />
+                    </td>
+                    <td>
+                        <a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId">@product.Name</a>
+                    </td>
+                    <td>
+                        <a asp-controller="Product" asp-action="List" asp-route-category="@product.Category.CategoryName">@product.Category.CategoryName</a>
+                    </td>
+                    <td>@product.Price</td>
+                    <td><input type="checkbox" asp-for="@product.InStock" />
+                    <td>
+                        <form asp-action="DeleteProduct" asp-route-productId="@product.ProductId" method="post">
+                            <a class="btn btn-sm btn-primary" asp-action="EditProduct" asp-route-productId="@product.ProductId">Edit</a>
+                            <button type="submit" onclick="return confirm('Do you really want to delete this product?');" class="btn btn-sm btn-danger">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
 }
 <p>
     <a class="btn btn-primary" asp-action="AddProduct">Add new product</a>

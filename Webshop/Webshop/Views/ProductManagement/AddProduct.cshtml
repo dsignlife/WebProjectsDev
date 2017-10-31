@@ -1,74 +1,77 @@
 ﻿@model ProductEditViewModel
 <h2>Create a new product</h2>
-<form asp-controller="ProductManagement" asp-action="AddProduct" method="post" class="form-horizontal" role="form">
-    <h4>Enter the product details below</h4>
-    <hr />
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Product.Name" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Product.Name" class="form-control" />
-            <span asp-validation-for="Product.Name" class="text-danger"></span>
+<div class="container-fluid" style="background: whitesmoke;">
+    <form asp-controller="ProductManagement" asp-action="AddProduct" method="post" class="form-horizontal" role="form">
+        <h4>Enter the product details below</h4>
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Product.Name" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Product.ShortDesc" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Product.ShortDesc" class="form-control" />
-            <span asp-validation-for="Product.ShortDesc" class="text-danger"></span>
+        <div class="form-group">
+            <label asp-for="Product.ShortDesc" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Product.ShortDesc" class="form-control" />
+                <span asp-validation-for="Product.ShortDesc" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Product.LongDesc" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Product.LongDesc" class="form-control" />
-            <span asp-validation-for="Product.LongDesc" class="text-danger"></span>
+        <div class="form-group">
+            <label asp-for="Product.LongDesc" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Product.LongDesc" class="form-control" />
+                <span asp-validation-for="Product.LongDesc" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Product.Price" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Product.Price" class="form-control" />
-            <span asp-validation-for="Product.Price" class="text-danger"></span>
+        <div class="form-group">
+            <label asp-for="Product.Price" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Product.ImageThumbnailUrl" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Product.ImageThumbnailUrl" class="form-control" />
-            <span asp-validation-for="Product.ImageThumbnailUrl" class="text-danger"></span>
+        <div class="form-group">
+            <label asp-for="Product.ImageThumbnailUrl" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Product.ImageThumbnailUrl" class="form-control" />
+                <span asp-validation-for="Product.ImageThumbnailUrl" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Product.ImageUrl" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Product.ImageUrl" class="form-control" />
-            <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
+        <div class="form-group">
+            <label asp-for="Product.ImageUrl" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Product.ImageUrl" class="form-control" />
+                <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Product.InStock" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Product.InStock" class="form-control" />
-            <span asp-validation-for="Product.InStock" class="text-danger"></span>
+        <div class="form-group">
+            <label asp-for="Product.InStock" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Product.InStock" class="form-control" />
+                <span asp-validation-for="Product.InStock" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Product.IsProductOfTheWeek" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Product.IsProductOfTheWeek" class="form-control" />
-            <span asp-validation-for="Product.IsProductOfTheWeek" class="text-danger"></span>
+        <div class="form-group">
+            <label asp-for="Product.IsProductOfTheWeek" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Product.IsProductOfTheWeek" class="form-control" />
+                <span asp-validation-for="Product.IsProductOfTheWeek" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Categories" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <select asp-for="CategoryId" class="form-control" asp-items="Model.Categories"></select>
+        <div class="form-group">
+            <label asp-for="Categories" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="CategoryId" class="form-control" asp-items="Model.Categories"></select>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-primary" value="Create product" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-success" value="Create product" />
+                <a asp-action="Index" class="btn btn-danger">Cancel</a>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>

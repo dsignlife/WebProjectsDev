@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<IdentityRole>
+
 <h2>Role management</h2>
 @if (!Model.Any()) {
     <tr>
@@ -10,7 +11,7 @@ else {
         <tr>
             <th>Role ID</th>
             <th>Role name</th>
-            <th>#Users</th>
+            <th>Actions</th>
         </tr>
         @foreach (var role in Model) {
             <tr>

@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Webshop.Models;
 using Webshop.ViewModels;
 
@@ -40,6 +43,36 @@ namespace Webshop.Controllers
                 CurrentCategory = currentCategory
             });
         }
+
+        //public async Task OnGetAsync(string searchString)
+        //{
+        //    var products = _productRepository.Products.OrderBy(p => p.ProductId).ToList();
+
+        //    if (!String.IsNullOrEmpty(searchString))
+        //    {
+        //        products = products.Where(s => s.Name.Contains(searchString)).OrderBy(p => p.ProductId).ToList();
+        //        //products = (List<Product>) products.Where(s => s.Name.Contains(searchString));
+        //    }
+        //    var f = await products.AsQueryable().ToListAsync();
+
+        //   // return View(f);
+        //}
+
+
+        //public async Task OnGetAsync(string searchString)
+        //{
+        //    var movies = from m in _productRepository.Products
+        //                 select m;
+
+        //    if (!String.IsNullOrEmpty(searchString))
+        //    {
+        //        movies = movies.Where(s => s.Name.Contains(searchString));
+        //    }
+        //    var f = await movies.AsQueryable().ToListAsync();
+
+        //    Movie = await movies.ToListAsync();
+        //}
+
 
         public IActionResult Details(int id)
         {

@@ -25,25 +25,27 @@
             </button>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
+            <ul class="nav navbar-nav navbar-left">
+                <li >
                     <a asp-controller="Home" asp-action="Index">Home</a>
                 </li>
                 @await Component.InvokeAsync("CategoryMenu")
                 <li>
                     <a asp-controller="Contact" asp-action="Index">Contact us</a>
                 </li>
-                @await Component.InvokeAsync("ShoppingCartSummary")
-
                 @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin")) {
                     @await Component.InvokeAsync("AdminMenu")
                     <li class="dropdown">
                         <a asp-controller="ProductManagement" asp-action="Index">Product Management</a>
                     </li>
                 }
-
             </ul>
-            @await Html.PartialAsync("LoginPartial")
+            <ul class="nav navbar-nav navbar-right">
+                @await Component.InvokeAsync("ShoppingCartSummary")
+                @await Html.PartialAsync("LoginPartial")
+    
+            </ul>
+       
         </div>
     </div>
 </nav>

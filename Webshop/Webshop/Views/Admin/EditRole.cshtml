@@ -26,9 +26,10 @@
     </div>
 </form>
 <h3>Users in this role</h3>
-<ul class="container-fluid" style="background: whitesmoke">
+<ul class="container-fluid row" style="background: whitesmoke; list-style: none">
     @foreach (var user in Model.Users) {
-        @user<br />
+        <li>@user</li>
+
     }
 </ul>
 <a asp-action="AddUserToRole" asp-route-roleId="@Model.Id" class="btn btn-primary">Add users to role</a>

@@ -1,4 +1,17 @@
 ﻿@model ProductsListViewModel
+<!-- ** BEGIN SEARCH AREA ** -->
+<div class="col-md-4 pull-right container-fluid">
+    <form>
+        <input placeholder="Search here" class="col-md-10" type="text" name="SearchString">
+        @*<button class="btn btn-sm btn-primary col-md-1  pull-right" >
+        <i class="glyphicon glyphicon-share-alt"></i>
+    </button>*@
+        <button class="btn btn-sm btn-primary col-md-1 " value="Filter">
+            <i class="glyphicon glyphicon-search"></i>
+        </button>
+    </form >
+</div>
+<!-- ** END SEARCH AREA ** -->
 <h1>@Model.CurrentCategory</h1>
 @foreach (var product in Model.Products) {
     @Html.Partial("ProductOverviewSummery", product)
