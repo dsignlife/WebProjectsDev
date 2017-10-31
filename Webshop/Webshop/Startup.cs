@@ -65,12 +65,7 @@ namespace Webshop
             else {
                 app.UseExceptionHandler("/AppException");
             }
-
-            ServeFromDirectory(app, env, "node_modules");
-            ServeFromDirectory(app, env, "src");
-
-
-            //app.UseStaticFiles();
+            app.UseStaticFiles();
             app.UseSession();
             app.UseAuthentication();
 
@@ -88,20 +83,6 @@ namespace Webshop
             //seed.Seed(app);
             //DbInitializer.Seed(app);
         }
-
-        public void ServeFromDirectory(IApplicationBuilder app, IHostingEnvironment env, string path)
-        {
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(env.ContentRootPath, path)
-                ),
-                RequestPath = "/" + path
-            });
-        }
-
-
-
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
