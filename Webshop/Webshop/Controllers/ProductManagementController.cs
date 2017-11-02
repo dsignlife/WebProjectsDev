@@ -7,7 +7,7 @@ using Webshop.ViewModels;
 
 namespace Webshop.Controllers
 {
-    [Authorize(Roles = "Admin"), Authorize(Policy = "DeleteProduct")]
+    [Authorize(Roles = "Admin")]
     public class ProductManagementController : Controller
     {
         private readonly ICategoryRepository _categoryRepository;

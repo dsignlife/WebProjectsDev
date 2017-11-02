@@ -1,0 +1,14 @@
+{
+  "name": "blueimp",
+  "homepage": "https://github.com/blueimp/Gallery",
+  "version": "2.28.0",
+  "_release": "2.28.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.28.0",
+    "commit": "01cc1f8b9873f4eab16d4cf31bc3357ecc301e9b"
+  },
+  "_source": "https://github.com/blueimp/Gallery.git",
+  "_target": "*",
+  "_originalSource": "blueimp"
+}
