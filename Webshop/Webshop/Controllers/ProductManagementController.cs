@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,8 +23,38 @@ namespace Webshop.Controllers
         public ViewResult Index()
         {
             var products = _productRepository.Products.OrderBy(p => p.ProductId);
+
+
             return View(products);
         }
+
+
+        public IActionResult Gallery(int productId)
+        {
+
+            var product = new ProductEditViewModel { Product = _productRepository.GetProductById(productId) };
+
+            return product == null ? View("error") 
+                
+                : View(product);
+
+
+            
+            // Categories.FirstOrDefault(c => c.CategoryName == category)
+
+                // ViewBag.productImg = product;
+        }
+
+
+        //public IActionResult Details(int id)
+        //{
+        //    var product = _productRepository.GetProductById(id);
+        //    if (product == null)
+        //        return NotFound();
+        //    return View(product);
+        //}
+
+
 
         public IActionResult AddProduct()
         {
